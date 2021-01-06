@@ -1,12 +1,10 @@
+import {NodeExpression} from "./expression";
+
 export class Parser {
   constructor() {
     this.rules = {};
     this.errors = [];
     this.warnings = [];
-  }
-
-  registerBlock(name, rules) {
-    this.rules[name] = rules;
   }
 
   registerError(error) {
@@ -17,19 +15,23 @@ export class Parser {
     this.warnings.append(warning);
   }
 
-  parse(markup) {
+  parse(markup, rules) {
     const domparser = new DOMParser();
     const doc = domparser.parseFromString(markup, 'text/html');
     let data = {};
 
-    debugger;
-    for (const [query, rule] of Object.entries(this.rules['main'])) {
-      const node = doc.querySelector(query)
-      if (typeof rule === 'function') {
-        const ruleData = rule(node, this);
-        if (typeof ruleData === 'object') {
-          data = {...data, ...ruleData}
-        }
+    for (const [query, rule] of Object.entries(rules)) {
+      const nodes = doc.querySelectorAll(query);
+      let ruleData;
+
+      if (rule instanceof NodeExpression) {
+        ruleData = rule.run(nodes, this);
+      } else if (typeof rule === 'function') {
+        ruleData = rule(nodes, this);
+      }
+
+      if (typeof ruleData === 'object') {
+        data = {...data, ...ruleData}
       }
     }
 

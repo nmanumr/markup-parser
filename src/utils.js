@@ -1,5 +1,7 @@
-export function simpleHash(text) {
-  return text
+// TODO: improve to something like this:
+// https://github.com/puleos/object-hash/blob/master/index.js#L167
+export function simpleHash(obj) {
+  return obj
       .toString()
       .split('')
       .reduce((hash, char) => {

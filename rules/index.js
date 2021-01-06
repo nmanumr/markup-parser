@@ -1,12 +1,11 @@
-import {Parser} from "../src/parser.js";
-import {checkLength, checkRegex} from '../src/checkers.js'
-
 const parser = new Parser();
 
-parser.registerBlock('main', {
-  'html>head': checkLength(1699),
-  '.label-default.label_without_bg': checkRegex('(?<rollNumber>(FA|SP)\\d{2}-\\w{3}-\\d{3})'),
-})
+
+
+const rules = {
+  // 'html>head': checkLength(1699),
+  // '.label-default.label_without_bg': checkRegex('(?<rollNumber>(FA|SP)\\d{2}-\\w{3}-\\d{3})'),
+};
 
 console.log(parser.parse(`<!DOCTYPE html>
 <html lang="en">
@@ -238,4 +237,4 @@ console.log(parser.parse(`<!DOCTYPE html>
     </div>
 </body>
 
-</html>`));
+</html>`, {}));

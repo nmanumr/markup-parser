@@ -5,12 +5,15 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup --config"
   },
   "keywords": [],
   "author": "nmanumr",
   "license": "ISC",
   "dependencies": {
     "xregexp": "^4.4.1"
+  },
+  "devDependencies": {
+    "rollup": "^2.36.1"
   }
 }
