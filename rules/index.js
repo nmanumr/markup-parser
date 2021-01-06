@@ -1,10 +1,12 @@
+const {Parser, q} = MarkupParser;
+
 const parser = new Parser();
 
 
 
 const rules = {
   // 'html>head': checkLength(1699),
-  // '.label-default.label_without_bg': checkRegex('(?<rollNumber>(FA|SP)\\d{2}-\\w{3}-\\d{3})'),
+  '.label-default.label_without_bg': q.first().text().regex(/\w{2}\d{2}-\w{3}-\d{3}/i).named('rollNumber'),
 };
 
 console.log(parser.parse(`<!DOCTYPE html>
@@ -237,4 +239,4 @@ console.log(parser.parse(`<!DOCTYPE html>
     </div>
 </body>
 
-</html>`, {}));
+</html>`, rules));

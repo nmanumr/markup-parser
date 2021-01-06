@@ -20,6 +20,12 @@ const expressions = [
     fn: (node) => node.innerText,
   },
   {
+    name: 'first',
+    type: [Element],
+    returnType: String,
+    fn: (list) => list[0],
+  },
+  {
     name: 'html',
     type: [Element],
     returnType: String,
@@ -68,7 +74,7 @@ const expressions = [
     name: 'regex',
     type: [String],
     returnType: [Object],
-    fn: (str, regex) => str.match(regex),
+    fn: (str, regex) => (str.match(regex) ?? [])[0],
   },
   {
     name: 'repeat',
@@ -114,6 +120,11 @@ const expressions = [
   },
 
   // Object functions
+  {
+    name: 'named',
+    returnType: Object,
+    fn: (val, name) => ({[name]: val}),
+  },
 ]
 
 class NodeExpression {
@@ -126,7 +137,7 @@ class NodeExpression {
   run(nodes, parser) {
     this[_PARSER] = parser;
     this[_ROOT_NODES] = nodes;
-    const data = this[_QUERY].reduce((acc, func) => func(acc, func[_FUNC_DATA]), nodes);
+    const data = this[_QUERY].reduce((acc, func) => func(acc, ...func[_FUNC_DATA].args), nodes);
     this[_PARSER] = null;
     return data;
   }
