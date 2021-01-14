@@ -1,6 +1,6 @@
 {
   "name": "mark-parser",
-  "version": "1.0.0-rc.1",
+  "version": "v1.0.0-alpha",
   "description": "A rule-based, context-aware markup parser.",
   "main": "build/bundle.js",
   "scripts": {
