@@ -1,5 +1,6 @@
 import {NodeExpression} from "./expression";
-import { merge, isPlainObject, omit } from 'lodash-es'
+import {merge, isPlainObject, isEmpty} from 'lodash-es'
+import {rename} from './utils';
 
 export class Parser {
   constructor() {
@@ -51,7 +52,7 @@ export class Parser {
           nodeMergableData.push(ruleData)
         }
 
-        delete ruleMeta.$namespaced;
+        delete ruleMeta?.$namespaced;
       }
 
       if (nodeMergableData.length > 0 && nodeMergableData.every((d) => isPlainObject(d))) {
@@ -70,7 +71,12 @@ export class Parser {
       data[query] = nodeData;
     }
 
-    data._meta = meta
+    for (const [key, val] of Object.entries(meta.$names || {})) {
+      rename(data, key, val);
+    }
+    delete meta.$names;
+
+    if (!isEmpty(meta)) data._meta = meta
     return data;
   }
 }

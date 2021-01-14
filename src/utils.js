@@ -1,3 +1,5 @@
+import {includes, keys, clone} from 'lodash-es';
+
 // TODO: improve to something like this:
 // https://github.com/puleos/object-hash/blob/master/index.js#L167
 export function simpleHash(obj) {
@@ -28,4 +30,13 @@ export function getPathTo(node) {
     path += `[${index + 1}]`;
   }
   return path;
+}
+
+export function rename(obj, key, newKey) {
+  if(includes(keys(obj), key)) {
+    obj[newKey] = clone(obj[key]);
+
+    delete obj[key];
+  }
+  return obj;
 }

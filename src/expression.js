@@ -1,4 +1,5 @@
 import {simpleHash} from "./utils";
+import { isEmpty } from 'lodash-es'
 
 const _QUERY = Symbol('_query');
 const _ROOT_NODES = Symbol('_root_nodess');
@@ -154,7 +155,7 @@ class NodeExpression {
 
     const data = this[_QUERY].reduce((acc, func) => func(acc, ...func[_FUNC_DATA].args), nodes);
     const meta = this[_META];
-    if (typeof data === "object") {
+    if (typeof data === "object" && !isEmpty(meta)) {
       data._meta = meta;
     }
 

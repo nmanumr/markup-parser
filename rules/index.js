@@ -5,8 +5,15 @@ const parser = new Parser();
 
 
 const rules = {
-  // 'html>head': checkLength(1699),
-  '.label-default.label_without_bg': q.first().text().regex(/\w{2}\d{2}-\w{3}-\d{3}/i).named('rollNumber'),
+  '$names': {
+    '.table.table-striped.table-bordered.table-hover tr': 'subjectList',
+  },
+  '.table.table-striped.table-bordered.table-hover tr': {
+    '$names': {
+      'td:first-child': 'code',
+    },
+    'td:first-child': q.text().trim()
+  },
 };
 
 console.log(parser.parse(`<!DOCTYPE html>
@@ -220,7 +227,188 @@ console.log(parser.parse(`<!DOCTYPE html>
             Registered Courses List</div>
     </div>
 </div>
+<div class="table-responsive quiz_listing">
+            <div id="RegisteredCourses">
+                <div style="background:#13A89E;margin: 10px;text-align: center;padding: 10px;font-weight: bold;color: white;font-size: 18px;">Registered Courses List</div>
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th width="">Course No</th>
+                            <th width="">Course Name</th>
+                            <th width="">Credits</th>
+                            <th width="">Teacher</th>
+                            <th title="Program - Semester - Description - Section" width="">Class</th>
+                            <th>Attendance Summary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
+                            <tr style=" cursor: pointer;" onclick="window.location='/Courses/SetCourse/50550'">
+                                <td>
+                                    CSC353          
+                                </td>
+                                    <td title="Theory and Lab Scheme Course">
+                                        Computer Graphics
+                                    </td>
+                                <td>
+                                    3
+                                </td>
+                                <td>
+                                    Aamer Mehmood
+                                </td>
+                                <td>
+
+                                    BCS 5 FA18-BCS-(AD) E-I A
+                                </td>
+                                <td>
+                                            <div id="bar_50550-Class" title="Class Attendance" class="lab_class_attendance" aria-valuenow="93" aria-valuemin="0" aria-valuemax="93"></div>
+                                            <script>
+                                                $('#bar_50550-Class').progressBarTimer({ _percentage: 93, autoStart: true, timeLimit: 1, label: { show: true, type: 'percent' } });
+                                            </script>
+                                            <div id="bar_50550-Lab" title="Lab Attendance" class="lab_class_attendance" aria-valuenow="93" aria-valuemin="0" aria-valuemax="93"></div>
+                                            <script>
+                                                $('#bar_50550-Lab').progressBarTimer({ _percentage: 93, autoStart: true, timeLimit: 1, label: { show: true, type: 'percent' } });
+                                            </script>
+
+                                </td>
+                            </tr>
+                            <tr style=" cursor: pointer;" onclick="window.location='/Courses/SetCourse/49494'">
+                                <td>
+                                    CSC339          
+                                </td>
+                                    <td title="Theory and Lab Scheme Course">
+                                        Data Communications and Computer Networks
+                                    </td>
+                                <td>
+                                    3
+                                </td>
+                                <td>
+                                    Imran Raza
+                                </td>
+                                <td>
+
+                                    BCS 5 FA18-BCS-B B
+                                </td>
+                                <td>
+                                            <div id="bar_49494-Class" title="Class Attendance" class="lab_class_attendance" aria-valuenow="87" aria-valuemin="0" aria-valuemax="87"></div>
+                                            <script>
+                                                $('#bar_49494-Class').progressBarTimer({ _percentage: 87, autoStart: true, timeLimit: 1, label: { show: true, type: 'percent' } });
+                                            </script>
+                                            <div id="bar_49494-Lab" title="Lab Attendance" class="lab_class_attendance" aria-valuenow="94" aria-valuemin="0" aria-valuemax="94"></div>
+                                            <script>
+                                                $('#bar_49494-Lab').progressBarTimer({ _percentage: 94, autoStart: true, timeLimit: 1, label: { show: true, type: 'percent' } });
+                                            </script>
+
+                                </td>
+                            </tr>
+                            <tr style=" cursor: pointer;" onclick="window.location='/Courses/SetCourse/49486'">
+                                <td>
+                                    CSC301          
+                                </td>
+                                    <td title="Theory Only Scheme Course">
+                                        Design and Analysis of Algorithms
+                                    </td>
+                                <td>
+                                    3
+                                </td>
+                                <td>
+                                    Asmara Safdar
+                                </td>
+                                <td>
+
+                                    BCS 5 FA18-BCS-B B
+                                </td>
+                                <td>
+                                            <div id="bar_49486-Class" title="Class Attendance" class="only_class_attendance" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <script>
+                                                $('#bar_49486-Class').progressBarTimer({ _percentage: 100, autoStart: true, timeLimit: 1, label: { show: true, type: 'percent' } });
+                                            </script>
+
+                                </td>
+                            </tr>
+                            <tr style=" cursor: pointer;" onclick="window.location='/Courses/SetCourse/49498'">
+                                <td>
+                                    CSC475          
+                                </td>
+                                    <td title="Theory Only Scheme Course">
+                                        Numerical Computing
+                                    </td>
+                                <td>
+                                    3
+                                </td>
+                                <td>
+                                    Majid Hasan Khattak
+                                </td>
+                                <td>
+
+                                    BCS 5 FA18-BCS-B B
+                                </td>
+                                <td>
+                                            <div id="bar_49498-Class" title="Class Attendance" class="only_class_attendance" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <script>
+                                                $('#bar_49498-Class').progressBarTimer({ _percentage: 100, autoStart: true, timeLimit: 1, label: { show: true, type: 'percent' } });
+                                            </script>
+
+                                </td>
+                            </tr>
+                            <tr style=" cursor: pointer;" onclick="window.location='/Courses/SetCourse/49490'">
+                                <td>
+                                    CSC322          
+                                </td>
+                                    <td title="Theory and Lab Scheme Course">
+                                        Operating Systems
+                                    </td>
+                                <td>
+                                    3
+                                </td>
+                                <td>
+                                    Dr. Muhammad Waqas Anwar
+                                </td>
+                                <td>
+
+                                    BCS 5 FA18-BCS-B B
+                                </td>
+                                <td>
+                                            <div id="bar_49490-Lab" title="Lab Attendance" class="lab_class_attendance" aria-valuenow="97" aria-valuemin="0" aria-valuemax="97"></div>
+                                            <script>
+                                                $('#bar_49490-Lab').progressBarTimer({ _percentage: 97, autoStart: true, timeLimit: 1, label: { show: true, type: 'percent' } });
+                                            </script>
+                                            <div id="bar_49490-Class" title="Class Attendance" class="lab_class_attendance" aria-valuenow="93" aria-valuemin="0" aria-valuemax="93"></div>
+                                            <script>
+                                                $('#bar_49490-Class').progressBarTimer({ _percentage: 93, autoStart: true, timeLimit: 1, label: { show: true, type: 'percent' } });
+                                            </script>
+
+                                </td>
+                            </tr>
+                            <tr style=" cursor: pointer;" onclick="window.location='/Courses/SetCourse/49799'">
+                                <td>
+                                    HUM111          
+                                </td>
+                                    <td title="Theory Only Scheme Course">
+                                        Pakistan Studies
+                                    </td>
+                                <td>
+                                    3
+                                </td>
+                                <td>
+                                    Tooba Sami Ahmad
+                                </td>
+                                <td>
+
+                                    BSE 5 FA18-BSE-A A
+                                </td>
+                                <td>
+                                            <div id="bar_49799-Class" title="Class Attendance" class="only_class_attendance" aria-valuenow="87" aria-valuemin="0" aria-valuemax="87"></div>
+                                            <script>
+                                                $('#bar_49799-Class').progressBarTimer({ _percentage: 87, autoStart: true, timeLimit: 1, label: { show: true, type: 'percent' } });
+                                            </script>
+
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div> 
+        </div>
 
             </div>
         </div>
@@ -240,3 +428,20 @@ console.log(parser.parse(`<!DOCTYPE html>
 </body>
 
 </html>`, rules));
+
+/**
+ * if its single node and node has id
+ *    name will be node_id
+ */
+
+/**
+ * {
+ *   "heads": {
+ *     "_meta": {
+ *       "test": 1234
+ *     }
+ *     "scripts": 12,
+ *   },
+ *   ""
+ * }
+ */
