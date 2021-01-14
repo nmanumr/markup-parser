@@ -5,6 +5,7 @@
   "main": "build/bundle.js",
   "scripts": {
     "build": "rollup --config",
+    "test": "echo \"tests later on\"",
     "prepublishOnly": "npm run build"
   },
   "files": [
