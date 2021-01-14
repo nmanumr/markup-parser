@@ -4,6 +4,7 @@ const _QUERY = Symbol('_query');
 const _ROOT_NODES = Symbol('_root_nodess');
 const _PARSER = Symbol('_parser');
 const _FUNC_DATA = Symbol('_func_data');
+const _META = Symbol('_meta');
 
 // lodash methods
 // camelCase, capitalize, deburr, endsWith, escape, escapeRegExp, lowerFirst, pad, padEnd, padStart,
@@ -46,6 +47,12 @@ const expressions = [
   },
 
   // String functions
+  {
+    name: 'trim',
+    type: [String],
+    returnType: Number,
+    fn: (str) => str.trim(),
+  },
   {
     name: 'length',
     type: [String],
@@ -123,7 +130,13 @@ const expressions = [
   {
     name: 'named',
     returnType: Object,
-    fn: (val, name) => ({[name]: val}),
+    fn: function (val, name) {
+      this[_META] = {
+        '$namespaced': true,
+        '$name': name,
+      };
+      return val;
+    },
   },
 ]
 
@@ -137,9 +150,17 @@ class NodeExpression {
   run(nodes, parser) {
     this[_PARSER] = parser;
     this[_ROOT_NODES] = nodes;
+    this[_META] = {};
+
     const data = this[_QUERY].reduce((acc, func) => func(acc, ...func[_FUNC_DATA].args), nodes);
+    const meta = this[_META];
+    if (typeof data === "object") {
+      data._meta = meta;
+    }
+
     this[_PARSER] = null;
-    return data;
+    this[_META] = null;
+    return [data, meta];
   }
 }
 
