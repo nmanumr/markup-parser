@@ -1,9 +1,8 @@
 {
   "name": "mark-parser",
   "version": "1.0.0-rc.1",
-  "description": "",
+  "description": "A rule-based, context-aware markup parser.",
   "main": "build/bundle.js",
-  "type": "module",
   "scripts": {
     "build": "rollup --config",
     "prepublishOnly": "npm run build"
