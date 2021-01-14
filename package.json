@@ -1,5 +1,5 @@
 {
-  "name": "mark-parser",
+  "name": "@nmanumr/markup-parser",
   "version": "1.0.0-alpha.1",
   "description": "A rule-based, context-aware markup parser.",
   "main": "build/bundle.js",
