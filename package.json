@@ -8,13 +8,18 @@
     "build": "rollup --config",
     "prepublishOnly": "npm run build"
   },
-  "files": ["build"],
+  "files": [
+    "build"
+  ],
   "keywords": [],
   "author": "nmanumr",
-  "license": "ISC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nmanumr/markup-parser.git"
+  },
   "dependencies": {
-    "lodash-es": "^4.17.20",
-    "xregexp": "^4.4.1"
+    "lodash-es": "^4.17.20"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

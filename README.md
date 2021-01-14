@@ -1,2 +1,2 @@
 # Markup Parser
-A rules based context aware markup parser
+A rule-based, context-aware markup parser
