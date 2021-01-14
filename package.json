@@ -16,7 +16,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nmanumr/mark-parser.git"
+    "url": "git+https://github.com/nmanumr/markup-parser.git"
   },
   "dependencies": {
     "lodash-es": "^4.17.20"
@@ -29,5 +29,9 @@
     "@rollup/plugin-node-resolve": "^11.0.1",
     "rollup": "^2.36.1",
     "rollup-plugin-terser": "^7.0.2"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/nmanumr/mark-parser/issues"
+  },
+  "homepage": "https://github.com/nmanumr/mark-parser#readme"
 }
