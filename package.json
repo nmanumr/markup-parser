@@ -1,5 +1,5 @@
 {
-  "name": "template-parser",
+  "name": "mark-parser",
   "version": "1.0.0-rc.1",
   "description": "",
   "main": "build/bundle.js",
@@ -16,7 +16,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nmanumr/markup-parser.git"
+    "url": "https://github.com/nmanumr/mark-parser.git"
   },
   "dependencies": {
     "lodash-es": "^4.17.20"
