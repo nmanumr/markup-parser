@@ -2,17 +2,13 @@ const {Parser, q} = MarkupParser;
 
 const parser = new Parser();
 
-
-
 const rules = {
-  '$names': {
-    '.table.table-striped.table-bordered.table-hover tr': 'subjectList',
+  '$refs': {
+    'subjectList': '.table.table-striped.table-bordered.table-hover tr',
+    'code': 'td:first-child',
   },
-  '.table.table-striped.table-bordered.table-hover tr': {
-    '$names': {
-      'td:first-child': 'code',
-    },
-    'td:first-child': q.text().trim()
+  '#!subjectList': {
+    '#!code': q.text().trim()
   },
 };
 
@@ -428,20 +424,3 @@ console.log(parser.parse(`<!DOCTYPE html>
 </body>
 
 </html>`, rules));
-
-/**
- * if its single node and node has id
- *    name will be node_id
- */
-
-/**
- * {
- *   "heads": {
- *     "_meta": {
- *       "test": 1234
- *     }
- *     "scripts": 12,
- *   },
- *   ""
- * }
- */

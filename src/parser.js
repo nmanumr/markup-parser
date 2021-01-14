@@ -24,14 +24,27 @@ export class Parser {
       const domparser = new DOMParser();
       markup = domparser.parseFromString(markup, 'text/html');
     }
+    const firstCharScore = {'$': 0, '#': 1}
+    const sortedEntries = Object.entries(rules)
+        .sort(
+            (a, b) => {
+              return (firstCharScore[b[0][0]] || 2) - (firstCharScore[a[0][0]] || 2)
+            }
+        );
 
-    for (const [query, rule] of Object.entries(rules)) {
+    for (let [query, rule] of sortedEntries) {
       if (query.startsWith('$')) {
         meta[query] = rule;
         continue;
       }
 
-      const nodes = markup.querySelectorAll(query);
+      let selector = query;
+      if (query.startsWith('#!')) {
+        query = query.slice(2);
+        selector = (meta.$refs ?? {})[query] || '';
+      }
+
+      const nodes = markup.querySelectorAll(selector);
       let nodeData = [], nodeMergableData = [];
 
       for (const node of nodes) {
@@ -42,7 +55,8 @@ export class Parser {
         } else if (typeof rule === 'function') {
           ruleData = rule(node, this);
         } else if (typeof rule === 'object') {
-          ruleData = this.parse(node, rule);
+          const mergedRules = merge({$names: meta.$names, $refs: meta.$refs}, rule)
+          ruleData = this.parse(node, mergedRules);
           ruleMeta = ruleData._meta;
         }
 
@@ -56,7 +70,7 @@ export class Parser {
       }
 
       if (nodeMergableData.length > 0 && nodeMergableData.every((d) => isPlainObject(d))) {
-        nodeMergableData = nodeMergableData.reduce((a, d) => merge(a, d), {});
+        nodeMergableData = merge({}, ...nodeMergableData);
         nodeData.push(nodeMergableData);
       } else {
         nodeData = [...nodeData, ...nodeMergableData];
@@ -75,6 +89,7 @@ export class Parser {
       rename(data, key, val);
     }
     delete meta.$names;
+    delete meta.$refs;
 
     if (!isEmpty(meta)) data._meta = meta
     return data;

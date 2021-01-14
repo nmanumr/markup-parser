@@ -1,5 +1,5 @@
 import {simpleHash} from "./utils";
-import { isEmpty } from 'lodash-es'
+import {isEmpty} from 'lodash-es'
 
 const _QUERY = Symbol('_query');
 const _ROOT_NODES = Symbol('_root_nodess');
