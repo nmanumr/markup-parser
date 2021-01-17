@@ -1,5 +1,5 @@
 import {simpleHash} from "./utils";
-import {isEmpty} from 'lodash-es'
+import {isEmpty, clone} from 'lodash-es'
 
 const _QUERY = Symbol('_query');
 const _ROOT_NODES = Symbol('_root_nodess');
@@ -141,7 +141,7 @@ const expressions = [
   },
 ]
 
-class NodeExpression {
+class Query {
   constructor() {
     this[_QUERY] = [];
     this[_ROOT_NODES] = null;
@@ -165,14 +165,16 @@ class NodeExpression {
   }
 }
 
-Object.assign(NodeExpression.prototype, {
+Object.assign(Query.prototype, {
   ...expressions.map((exp) => {
     const func = function (...args) {
       const query_func = exp.fn.bind(this);
       query_func[_FUNC_DATA] = {...exp, args};
 
-      this[_QUERY].push(query_func);
-      return this;
+      const q = new Query();
+      q[_QUERY] = clone(this[_QUERY]);
+      q[_QUERY].push(query_func);
+      return q;
     }
 
     func[_FUNC_DATA] = exp;
@@ -183,5 +185,5 @@ Object.assign(NodeExpression.prototype, {
   }, {}),
 });
 
-export {NodeExpression};
-export const q = new NodeExpression();
+export {Query};
+export const q = new Query();

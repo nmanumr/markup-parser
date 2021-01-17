@@ -1,4 +1,4 @@
-import {NodeExpression} from "./expression";
+import {Query} from "./expression";
 import {merge, isPlainObject, isEmpty} from 'lodash-es'
 import {rename} from './utils';
 
@@ -50,7 +50,7 @@ export class Parser {
       for (const node of nodes) {
         let ruleData, ruleMeta = {};
 
-        if (rule instanceof NodeExpression) {
+        if (rule instanceof Query) {
           [ruleData, ruleMeta] = rule.run(node, this);
         } else if (typeof rule === 'function') {
           ruleData = rule(node, this);
