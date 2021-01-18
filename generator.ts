@@ -30,6 +30,7 @@ function getLeadingComment(node, source) {
 }
 
 function parseType(typeNode) {
+    if (!typeNode) return;
     if (typeNode.kind === 182) { // Union type
         return typeNode.types.map(t => parseType(t));
     } else if (Object.keys(TYPE_MAP).includes(typeNode.kind.toString())) {

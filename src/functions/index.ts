@@ -75,5 +75,116 @@ export const functions = [
         fn: function (node: HTMLElement): Object {
             return node.dataset;
         }
+    },
+    {
+        name: "children",
+        inputType: HTMLElement,
+        outputType: Array,
+        fn: function (node: HTMLElement): HTMLElement[] {
+            return Array.from(node.children) as HTMLElement[];
+        }
+    },
+    {
+        name: "parent",
+        inputType: HTMLElement,
+        outputType: HTMLElement,
+        fn: function (node: HTMLElement): HTMLElement {
+            return node.parentNode as HTMLElement;
+        }
+    },
+    {
+        name: "parents",
+        inputType: HTMLElement,
+        fn: function (node: HTMLElement, until?: string, filter?: string) {
+            const result = [];
+            const matchesSelector = node.matches || node.webkitMatchesSelector;
+            node = node.parentElement;
+            while (node && !(until && matchesSelector.call(node, until))) {
+                if (!filter) {
+                    result.push(node);
+                }
+                else {
+                    if (matchesSelector.call(node, filter)) {
+                        result.push(node);
+                    }
+                }
+                node = node.parentElement;
+            }
+            return result;
+        }
+    },
+    {
+        name: "siblings",
+        inputType: HTMLElement,
+        outputType: Array,
+        fn: function (node: HTMLElement): HTMLElement[] {
+            return Array.from(node.parentNode.children).filter((child) => child !== node) as HTMLElement[];
+        }
+    },
+    {
+        name: "closest",
+        inputType: HTMLElement,
+        outputType: HTMLElement,
+        fn: function (node: HTMLElement, selector: string): HTMLElement {
+            return node.closest(selector);
+        }
+    },
+    {
+        name: "find",
+        inputType: HTMLElement,
+        outputType: Array,
+        fn: function (node: HTMLElement, selector: string): HTMLElement[] {
+            return Array.from(node.querySelectorAll(selector));
+        }
+    },
+    {
+        name: "next",
+        inputType: HTMLElement,
+        outputType: Element,
+        fn: function (node: HTMLElement): Element {
+            return node.nextElementSibling;
+        }
+    },
+    {
+        name: "prev",
+        inputType: HTMLElement,
+        outputType: Element,
+        fn: function (node: HTMLElement): Element {
+            return node.previousElementSibling;
+        }
+    },
+    {
+        name: "nextAll",
+        inputType: HTMLElement,
+        outputType: Array,
+        fn: function (node: HTMLElement, filter?: string): HTMLElement[] {
+            const siblings = [];
+            let elm: Element = node.nextElementSibling;
+            while (elm) {
+                if (elm.nodeType === 3)
+                    continue;
+                if (!filter || elm.matches(filter))
+                    siblings.push(elm);
+                elm = elm.nextElementSibling;
+            }
+            return siblings;
+        }
+    },
+    {
+        name: "prevAll",
+        inputType: HTMLElement,
+        outputType: Array,
+        fn: function (node: HTMLElement, filter?: string): HTMLElement[] {
+            const siblings = [];
+            let elm: Element = node.previousElementSibling;
+            while (elm) {
+                if (elm.nodeType === 3)
+                    continue;
+                if (!filter || elm.matches(filter))
+                    siblings.push(elm);
+                elm = elm.previousElementSibling;
+            }
+            return siblings;
+        }
     }
 ];
