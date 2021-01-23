@@ -1,4 +1,4 @@
 import {Parser} from "./parser";
-import {q} from './expression';
+import {q} from './query';
 
 export {Parser, q};

@@ -13,6 +13,7 @@ const TYPE_KIND_MAP = {
 }
 const TYPE_MAP = {
     'IterableIterator': 'IterableIterator',
+    'RulesObject': 'Object',
     'T': 'T',
 };
 
