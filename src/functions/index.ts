@@ -1,23 +1,117 @@
 // Auto generated file. DO NOT EDIT
-export default [
+export const functions = [
     {
-        name: "first",
-        inputType: Array,
+        name: 'first',
+        inputType: [String, Array, 'IterableIterator'],
         outputType: ['T', undefined],
-        fn: function <T>(arr: Array<T>): T | undefined {
-            return arr[0];
+        fn: function <T>(collection: string | Array<any> | IterableIterator<any>): T | undefined {
+            if (typeof collection["next"] === "function") {
+                return collection["next"]().value;
+            }
+            return collection[0];
         }
     },
     {
-        name: "last",
-        inputType: Array,
+        name: 'last',
+        inputType: [String, Array, 'IterableIterator'],
         outputType: ['T', undefined],
-        fn: function <T>(arr: Array<T>): T | undefined {
-            return arr[arr.length - 1];
+        fn: function <T>(collection: string | Array<any> | IterableIterator<any>): T | undefined {
+            if (typeof collection["length"] === "number") {
+                return collection[collection["length"] - 1];
+            }
+            let value;
+            for (value of collection)
+                ;
+            return value;
         }
     },
     {
-        name: "text",
+        name: 'compact',
+        inputType: [String, Array, 'IterableIterator'],
+        fn: function* (collection: string | Array<any> | IterableIterator<any>) {
+            for (const e of collection) {
+                if (e) {
+                    yield e;
+                }
+            }
+        }
+    },
+    {
+        name: 'chunk',
+        inputType: [String, Array, 'IterableIterator'],
+        fn: function* (collection: string | Array<any> | IterableIterator<any>, size: number) {
+            let chunk = [];
+            for (const e of collection) {
+                if (chunk.length >= size) {
+                    yield chunk;
+                    chunk = [];
+                }
+                chunk.push(e);
+            }
+            yield chunk;
+        }
+    },
+    {
+        name: 'concat',
+        inputType: [Array, 'IterableIterator'],
+        fn: function* (collection1: Array<any> | IterableIterator<any>, collection2: Array<any> | IterableIterator<any>) {
+            for (const e of collection1) {
+                yield e;
+            }
+            for (const e of collection2) {
+                yield e;
+            }
+        }
+    },
+    {
+        name: 'filter',
+        inputType: [Array, 'IterableIterator'],
+        fn: function* (collection: Array<any> | IterableIterator<any>, predicate: (e, i) => boolean) {
+            let i = 0;
+            for (const e of collection) {
+                if (predicate(e, i++))
+                    yield e;
+            }
+        }
+    },
+    {
+        name: 'length',
+        inputType: [Array, 'IterableIterator', String],
+        outputType: Number,
+        fn: function (collection: Array<any> | IterableIterator<any> | string): number {
+            if (collection.hasOwnProperty("length")) {
+                return (collection as Array<any>).length;
+            }
+            let i = 0;
+            for (let e of collection) {
+                i++;
+            }
+            return i;
+        }
+    },
+    {
+        name: 'map',
+        inputType: [Array, 'IterableIterator'],
+        fn: function* (collection: Array<any> | IterableIterator<any>, iteratee: (e, i) => boolean) {
+            let i = 0;
+            for (const e of collection) {
+                yield iteratee(e, i++);
+            }
+        }
+    },
+    {
+        name: 'tap',
+        inputType: [Array, 'IterableIterator'],
+        fn: function* (collection: Array<any> | IterableIterator<any>, iteratee: (e, i) => boolean) {
+            let i = 0;
+            for (const e of collection) {
+                iteratee(e, i);
+                yield e;
+            }
+        }
+    },
+    {
+        name: 'text',
         inputType: HTMLElement,
         outputType: String,
         fn: function (node: HTMLElement, collapseSpaces: boolean = true): string {
@@ -29,7 +123,7 @@ export default [
         }
     },
     {
-        name: "html",
+        name: 'html',
         inputType: HTMLElement,
         outputType: String,
         fn: function (node: HTMLElement): string {
@@ -37,7 +131,7 @@ export default [
         }
     },
     {
-        name: "fullHtml",
+        name: 'fullHtml',
         inputType: HTMLElement,
         outputType: String,
         fn: function (node: HTMLElement): string {
@@ -45,7 +139,7 @@ export default [
         }
     },
     {
-        name: "attr",
+        name: 'attr',
         inputType: HTMLElement,
         outputType: String,
         fn: function (node: HTMLElement, attr_name: string): string {
@@ -53,7 +147,7 @@ export default [
         }
     },
     {
-        name: "value",
+        name: 'value',
         inputType: HTMLInputElement,
         outputType: String,
         fn: function (node: HTMLInputElement): string {
@@ -61,7 +155,7 @@ export default [
         }
     },
     {
-        name: "classes",
+        name: 'classes',
         inputType: HTMLElement,
         outputType: Array,
         fn: function (node: HTMLElement): Array<string> {
@@ -69,7 +163,7 @@ export default [
         }
     },
     {
-        name: "dataset",
+        name: 'dataset',
         inputType: HTMLElement,
         outputType: Object,
         fn: function (node: HTMLElement): Object {
@@ -77,7 +171,7 @@ export default [
         }
     },
     {
-        name: "children",
+        name: 'children',
         inputType: HTMLElement,
         outputType: Array,
         fn: function (node: HTMLElement): HTMLElement[] {
@@ -85,7 +179,7 @@ export default [
         }
     },
     {
-        name: "parent",
+        name: 'parent',
         inputType: HTMLElement,
         outputType: HTMLElement,
         fn: function (node: HTMLElement): HTMLElement {
@@ -93,7 +187,7 @@ export default [
         }
     },
     {
-        name: "parents",
+        name: 'parents',
         inputType: HTMLElement,
         fn: function (node: HTMLElement, until?: string, filter?: string) {
             const result = [];
@@ -114,7 +208,7 @@ export default [
         }
     },
     {
-        name: "siblings",
+        name: 'siblings',
         inputType: HTMLElement,
         outputType: Array,
         fn: function (node: HTMLElement): HTMLElement[] {
@@ -122,7 +216,7 @@ export default [
         }
     },
     {
-        name: "closest",
+        name: 'closest',
         inputType: HTMLElement,
         outputType: HTMLElement,
         fn: function (node: HTMLElement, selector: string): HTMLElement {
@@ -130,7 +224,7 @@ export default [
         }
     },
     {
-        name: "find",
+        name: 'find',
         inputType: HTMLElement,
         outputType: Array,
         fn: function (node: HTMLElement, selector: string): HTMLElement[] {
@@ -138,7 +232,7 @@ export default [
         }
     },
     {
-        name: "next",
+        name: 'next',
         inputType: HTMLElement,
         outputType: Element,
         fn: function (node: HTMLElement): Element {
@@ -146,7 +240,7 @@ export default [
         }
     },
     {
-        name: "prev",
+        name: 'prev',
         inputType: HTMLElement,
         outputType: Element,
         fn: function (node: HTMLElement): Element {
@@ -154,7 +248,7 @@ export default [
         }
     },
     {
-        name: "nextAll",
+        name: 'nextAll',
         inputType: HTMLElement,
         outputType: Array,
         fn: function (node: HTMLElement, filter?: string): HTMLElement[] {
@@ -171,7 +265,7 @@ export default [
         }
     },
     {
-        name: "prevAll",
+        name: 'prevAll',
         inputType: HTMLElement,
         outputType: Array,
         fn: function (node: HTMLElement, filter?: string): HTMLElement[] {
@@ -185,6 +279,69 @@ export default [
                 elm = elm.previousElementSibling;
             }
             return siblings;
+        }
+    },
+    {
+        name: 'trim',
+        inputType: String,
+        outputType: String,
+        fn: function (input: string): string {
+            return input.trim();
+        }
+    },
+    {
+        name: 'upperCase',
+        inputType: String,
+        outputType: String,
+        fn: function (input: string): string {
+            return input.toUpperCase();
+        }
+    },
+    {
+        name: 'lowerCase',
+        inputType: String,
+        outputType: String,
+        fn: function (input: string): string {
+            return input.toLowerCase();
+        }
+    },
+    {
+        name: 'regex',
+        inputType: String,
+        outputType: [Array, null],
+        fn: function (input: string, matcher: Matcher): Array<string> | null {
+            return input.match(matcher);
+        }
+    },
+    {
+        name: 'repeat',
+        inputType: String,
+        outputType: String,
+        fn: function (input: string, n: number): string {
+            return input.repeat(n);
+        }
+    },
+    {
+        name: 'replace',
+        inputType: String,
+        outputType: String,
+        fn: function (input: string, searchValue: string | RegExp, replacer: string | ((substring: string, ...args: any[]) => string)): string {
+            return input.replace(searchValue, replacer as any);
+        }
+    },
+    {
+        name: 'split',
+        inputType: String,
+        outputType: Array,
+        fn: function (input: string, splitter: string, limit?: number): Array<string> {
+            return input.split(splitter, limit);
+        }
+    },
+    {
+        name: 'startsWith',
+        inputType: String,
+        fn: function (input: string, searchString: string, position?: number): boolean {
+            return input.startsWith(searchString, position);
         }
     }
 ];

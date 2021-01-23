@@ -6,11 +6,15 @@ import * as doctrine from 'doctrine';
 
 const BASE_DIR = './src/functions';
 const GITHUB_URL = 'https://github.com/nmanumr/mark-parser/tree/master/';
-const TYPE_MAP = {
+const TYPE_KIND_MAP = {
     150: 'undefined',
     147: 'string',
     144: 'number',
 }
+const TYPE_MAP = {
+    'IterableIterator': 'IterableIterator',
+    'T': 'T',
+};
 
 function getFiles() {
     return fs
@@ -33,8 +37,8 @@ function parseType(typeNode) {
     if (!typeNode) return;
     if (typeNode.kind === 182) { // Union type
         return typeNode.types.map(t => parseType(t));
-    } else if (Object.keys(TYPE_MAP).includes(typeNode.kind.toString())) {
-        return TYPE_MAP[typeNode.kind];
+    } else if (Object.keys(TYPE_KIND_MAP).includes(typeNode.kind.toString())) {
+        return TYPE_KIND_MAP[typeNode.kind];
     } else if (typeNode.kind === 191 && typeNode.literal.kind === 103) {
         return 'null';
     } else if (typeNode.kind === 178) { // Array Type
@@ -138,10 +142,10 @@ function getTypeFactoryCode(type) {
         return ts.factory.createArrayLiteralExpression(type.map(d => getTypeFactoryCode(d)));
     } else if (type === 'null') {
         return ts.factory.createNull();
-    } else if (Object.values(TYPE_MAP).includes(type) && type !== 'undefined') {
+    } else if (Object.values(TYPE_KIND_MAP).includes(type) && type !== 'undefined') {
         return ts.factory.createIdentifier(type.charAt(0).toUpperCase() + type.slice(1));
-    } else if (type === 'T') {
-        return ts.factory.createStringLiteral(type, true);
+    } else if (Object.keys(TYPE_MAP).includes(type)) {
+        return ts.factory.createStringLiteral(TYPE_MAP[type], true);
     }
     return ts.factory.createIdentifier(type);
 }
@@ -155,7 +159,7 @@ function generateCode(fns) {
         const syntheticObj = [
             ts.factory.createPropertyAssignment(
                 'name',
-                ts.factory.createStringLiteral(fn.name)
+                ts.factory.createStringLiteral(fn.name, true)
             )
         ];
         if (fn.input) {
@@ -174,9 +178,11 @@ function generateCode(fns) {
             ts.factory.createObjectLiteralExpression([
                 ...syntheticObj,
                 ts.factory.createPropertyAssignment(
-                    'fn',
-                    ts.createFunctionExpression(
-                        undefined, undefined, undefined,
+                    ts.factory.createIdentifier("fn"),
+                    ts.factory.createFunctionExpression(
+                        undefined,
+                        fn.node.asteriskToken,
+                        undefined,
                         fn.node.typeParameters,
                         fn.node.parameters,
                         fn.node.type,

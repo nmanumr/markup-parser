@@ -85,7 +85,7 @@ export class Parser {
         }
       }
 
-      if ((nodeMeta?.$namespaced ?? true) && typeof nodeData === 'object') {
+      if (!(nodeMeta?.$namespaced ?? true) && typeof nodeData === 'object') {
         data = {...data, ...nodeData}
       } else {
         data[query] = nodeData;

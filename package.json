@@ -4,8 +4,7 @@
   "description": "A rule-based, context-aware markup parser.",
   "main": "lib/index.js",
   "scripts": {
-    "build": "rollup --config",
-    "test": "echo \"tests later on\"",
+    "build": "ts-node generator.ts && rollup --config",
     "prepublishOnly": "npm run build"
   },
   "files": [

@@ -1,28 +1,141 @@
 ## `first()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/array.ts#L1)
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L4)
 
-
+Gets the first element of collection.
 
 ### Input
 
-* `Array<T>`: 
+* `string | Array | IterableIterator<T>`: 
 
 ### Output
 
 * `T | undefined`: 
 
 ## `last()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/array.ts#L5)
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L14)
+
+Gets the last element of collection.
+
+### Input
+
+* `string | Array | IterableIterator<T>`: 
+
+### Output
+
+* `T | undefined`: 
+
+## `compact()`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L27)
+
+Creates an array with all falsey values removed.
+The values false, null, 0, "", undefined, and NaN are falsey.
+
+### Input
+
+* `string | Array | IterableIterator`: 
+
+### Output
+
+* `undefined`: 
+
+## `chunk(size)`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L39)
+
+Creates an array of elements split into groups the length of size.
+If array can't be split evenly, the final chunk will be the remaining elements.
+
+### Input
+
+* `string | Array | IterableIterator`: 
+
+### Output
+
+* `undefined`: 
+
+### Parameters
+
+* `size(number)`: 
+
+## `concat(collection2)`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L54)
+
+Creates a new array concatenating array with any additional arrays and/or values.
+
+### Input
+
+* `Array | IterableIterator`: 
+
+### Output
+
+* `undefined`: 
+
+### Parameters
+
+* `collection2(Array | IterableIterator)`: 
+
+## `filter(predicate)`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L63)
 
 
 
 ### Input
 
-* `Array<T>`: 
+* `Array | IterableIterator`: 
 
 ### Output
 
-* `T | undefined`: 
+* `undefined`: 
+
+### Parameters
+
+* `predicate`: 
+
+## `length()`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L72)
+
+// @ts-ignore
+
+### Input
+
+* `Array | IterableIterator | string`: 
+
+### Output
+
+* `number`: 
+
+## `map(iteratee)`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L83)
+
+
+
+### Input
+
+* `Array | IterableIterator`: 
+
+### Output
+
+* `undefined`: 
+
+### Parameters
+
+* `iteratee`: 
+
+## `tap(iteratee)`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L90)
+
+
+
+### Input
+
+* `Array | IterableIterator`: 
+
+### Output
+
+* `undefined`: 
+
+### Parameters
+
+* `iteratee`: 
 
 ## `text([collapseSpaces])`
 [Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L8)
@@ -284,4 +397,131 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 ### Parameters
 
 * `filter?(string)`: A string containing a selector expression to match elements against
+
+## `trim()`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L1)
+
+
+
+### Input
+
+* `string`: 
+
+### Output
+
+* `string`: 
+
+## `upperCase()`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L5)
+
+
+
+### Input
+
+* `string`: 
+
+### Output
+
+* `string`: 
+
+## `lowerCase()`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L9)
+
+
+
+### Input
+
+* `string`: 
+
+### Output
+
+* `string`: 
+
+## `regex(matcher)`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L15)
+
+
+
+### Input
+
+* `string`: 
+
+### Output
+
+* `Array | null`: 
+
+### Parameters
+
+* `matcher(Matcher)`: 
+
+## `repeat(n)`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L19)
+
+
+
+### Input
+
+* `string`: 
+
+### Output
+
+* `string`: 
+
+### Parameters
+
+* `n(number)`: 
+
+## `replace(searchValue, replacer)`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L23)
+
+
+
+### Input
+
+* `string`: 
+
+### Output
+
+* `string`: 
+
+### Parameters
+
+* `searchValue(string | RegExp)`: 
+* `replacer(string | )`: 
+
+## `split(splitter, [limit])`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L27)
+
+
+
+### Input
+
+* `string`: 
+
+### Output
+
+* `Array`: 
+
+### Parameters
+
+* `splitter(string)`: 
+* `limit?(number)`: 
+
+## `startsWith(searchString, [position])`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L31)
+
+
+
+### Input
+
+* `string`: 
+
+### Output
+
+* `undefined`: 
+
+### Parameters
+
+* `searchString(string)`: 
+* `position?(number)`: 
 

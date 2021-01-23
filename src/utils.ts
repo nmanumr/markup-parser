@@ -1,17 +1,5 @@
 import {includes, keys, clone} from 'lodash-es';
 
-// TODO: improve to something like this:
-// https://github.com/puleos/object-hash/blob/master/index.js#L167
-export function simpleHash(obj) {
-  return obj
-      .toString()
-      .split('')
-      .reduce((hash, char) => {
-        hash = ((hash << 5) - hash) + char;
-        return hash & hash;
-      }, 0);
-}
-
 export function getPathTo(node: HTMLElement) {
   if (node.id !== '') {
     return `id("${node.id}")`;
