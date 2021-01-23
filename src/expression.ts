@@ -1,5 +1,7 @@
-import {simpleHash} from "./utils";
 import {isEmpty, clone} from 'lodash-es'
+
+import {simpleHash} from "./utils";
+import functions from "./functions";
 
 const _QUERY = Symbol('_query');
 const _ROOT_NODES = Symbol('_root_nodess');
@@ -12,34 +14,7 @@ const _META = Symbol('_meta');
 
 
 // default
-
 const expressions = [
-  // Node level functions
-  {
-    name: 'text',
-    type: [Element],
-    returnType: String,
-    fn: (node) => node.innerText,
-  },
-  {
-    name: 'first',
-    type: [Element],
-    returnType: String,
-    fn: (list) => list[0],
-  },
-  {
-    name: 'html',
-    type: [Element],
-    returnType: String,
-    fn: (node) => node.innerHTML,
-  },
-  {
-    name: 'attr',
-    type: [Element],
-    returnType: String,
-    fn: (node, name) => node.getAttribute(name),
-  },
-
   // Others
   {
     name: 'hash',
@@ -141,6 +116,11 @@ const expressions = [
   },
 ]
 
+export interface FnOptions {
+  inputType?: any | any[],
+  outputType?: any | any[],
+}
+
 class Query {
   constructor() {
     this[_QUERY] = [];
@@ -148,7 +128,7 @@ class Query {
     this[_PARSER] = null;
   }
 
-  run(nodes, parser) {
+  run(nodes: Array<HTMLElement>, parser) {
     this[_PARSER] = parser;
     this[_ROOT_NODES] = nodes;
     this[_META] = {};
@@ -163,13 +143,15 @@ class Query {
     this[_META] = null;
     return [data, meta];
   }
-}
 
-Object.assign(Query.prototype, {
-  ...expressions.map((exp) => {
+  registerFn(name: string, fn: (...args) => any, options: FnOptions) {
+    if (this[name]) {
+      throw new Error(`Function with name "${name}" is already defined in Query instance.`);
+    }
+
     const func = function (...args) {
-      const query_func = exp.fn.bind(this);
-      query_func[_FUNC_DATA] = {...exp, args};
+      const query_func = fn.bind(this);
+      query_func[_FUNC_DATA] = {name, args, ...options};
 
       const q = new Query();
       q[_QUERY] = clone(this[_QUERY]);
@@ -177,13 +159,15 @@ Object.assign(Query.prototype, {
       return q;
     }
 
-    func[_FUNC_DATA] = exp;
-    return func;
-  }).reduce((proto, func) => {
-    proto[func[_FUNC_DATA].name] = func;
-    return proto;
-  }, {}),
-});
+    func[_FUNC_DATA] = {name, ...options};
+    // @ts-ignore
+    this.__proto__[name] = func;
+  }
+}
 
-export {Query};
-export const q = new Query();
+const q = new Query();
+functions.forEach((fn) => {
+  q.registerFn(fn.name, fn.fn, fn);
+})
+
+export {Query, q};

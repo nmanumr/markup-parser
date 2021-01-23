@@ -1,23 +1,23 @@
 import {Query} from "./expression";
-import {merge, isPlainObject, isEmpty} from 'lodash-es'
+import {merge, isEmpty, isPlainObject} from 'lodash-es'
 import {rename} from './utils';
 
+type SimpleObj = {[name: string]: any};
+
 export class Parser {
-  constructor() {
-    this.errors = [];
-    this.warnings = [];
-  }
+  errors = [];
+  warnings = [];
 
   registerError(error) {
-    this.errors.append(error);
+    this.errors.push(error);
   }
 
   registerWarning(warning) {
-    this.warnings.append(warning);
+    this.warnings.push(warning);
   }
 
   parse(markup, rules) {
-    let data = {}, meta = {};
+    let data: SimpleObj = {}, meta: SimpleObj = {};
 
     if (typeof markup === 'string') {
       // TODO: handle nodejs env
@@ -45,44 +45,51 @@ export class Parser {
       }
 
       const nodes = markup.querySelectorAll(selector);
-      let nodeData = [], nodeMergableData = [];
+      let nodeData, nodeMeta: SimpleObj = {};
 
-      for (const node of nodes) {
-        let ruleData, ruleMeta = {};
+      if (rule instanceof Query) {
+        [nodeData, nodeMeta] = rule.run(nodes, this);
+      } else if (typeof rule === 'function') {
+        nodeData = rule(nodes, this);
+      } else if (typeof rule === 'object') {
+        nodeData = [];
+        let nodeMergableData = [];
 
-        if (rule instanceof Query) {
-          [ruleData, ruleMeta] = rule.run(node, this);
-        } else if (typeof rule === 'function') {
-          ruleData = rule(node, this);
-        } else if (typeof rule === 'object') {
+        for (const node of nodes) {
+          let ruleData, ruleMeta: SimpleObj = {};
+
           const mergedRules = merge({$names: meta.$names, $refs: meta.$refs}, rule)
           ruleData = this.parse(node, mergedRules);
           ruleMeta = ruleData._meta;
+
+          if (ruleMeta?.$namespaced ?? true) {
+            nodeData.push(ruleData);
+          } else {
+            nodeMergableData.push(ruleData)
+          }
+
+          delete ruleMeta?.$namespaced;
         }
 
-        if (ruleMeta?.$namespaced ?? true) {
-          nodeData.push(ruleData);
+        if (nodeMergableData.length > 0 && nodeMergableData.every((d) => isPlainObject(d))) {
+          nodeMergableData = merge({}, ...nodeMergableData);
+          nodeData.push(nodeMergableData);
         } else {
-          nodeMergableData.push(ruleData)
+          nodeData = [...nodeData, ...nodeMergableData];
         }
 
-        delete ruleMeta?.$namespaced;
+        if (nodeData.length === 1) {
+          nodeData = nodeData[0];
+        } else if (nodeData.length === 0) {
+          nodeData = null;
+        }
       }
 
-      if (nodeMergableData.length > 0 && nodeMergableData.every((d) => isPlainObject(d))) {
-        nodeMergableData = merge({}, ...nodeMergableData);
-        nodeData.push(nodeMergableData);
+      if ((nodeMeta?.$namespaced ?? true) && typeof nodeData === 'object') {
+        data = {...data, ...nodeData}
       } else {
-        nodeData = [...nodeData, ...nodeMergableData];
+        data[query] = nodeData;
       }
-
-      if (nodeData.length === 1) {
-        nodeData = nodeData[0];
-      } else if (nodeData.length === 0) {
-        nodeData = null;
-      }
-
-      data[query] = nodeData;
     }
 
     for (const [key, val] of Object.entries(meta.$names || {})) {

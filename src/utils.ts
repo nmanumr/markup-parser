@@ -12,7 +12,7 @@ export function simpleHash(obj) {
       }, 0);
 }
 
-export function getPathTo(node) {
+export function getPathTo(node: HTMLElement) {
   if (node.id !== '') {
     return `id("${node.id}")`;
   }
@@ -25,7 +25,7 @@ export function getPathTo(node) {
       .filter(e => e.nodeName === node.nodeName);
   const index = sameTagSiblings.indexOf(node);
 
-  let path = `${getPathTo(node.parentNode)}/${node.tagName}`;
+  let path = `${getPathTo(node.parentNode as HTMLElement)}/${node.tagName}`;
   if (sameTagSiblings.length > 1) {
     path += `[${index + 1}]`;
   }

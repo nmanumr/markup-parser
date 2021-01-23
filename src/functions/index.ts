@@ -1,5 +1,5 @@
 // Auto generated file. DO NOT EDIT
-export const functions = [
+export default [
     {
         name: "first",
         inputType: Array,
