@@ -94,3 +94,7 @@ function* tap(collection: Array<any> | IterableIterator<any>, iteratee: (e, i) =
         yield e;
     }
 }
+
+function toList(collection: Array<any> | IterableIterator<any>) {
+    return Array.from(collection);
+}

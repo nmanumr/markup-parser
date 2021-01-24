@@ -137,6 +137,19 @@ Creates a new array concatenating array with any additional arrays and/or values
 
 * `iteratee`: 
 
+## `toList()`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L98)
+
+
+
+### Input
+
+* `Array | IterableIterator`: 
+
+### Output
+
+* `undefined`: 
+
 ## `text([collapseSpaces])`
 [Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L8)
 

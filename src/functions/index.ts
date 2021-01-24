@@ -111,6 +111,13 @@ export const functions = [
         }
     },
     {
+        name: 'toList',
+        inputType: [Array, 'IterableIterator'],
+        fn: function (collection: Array<any> | IterableIterator<any>) {
+            return Array.from(collection);
+        }
+    },
+    {
         name: 'text',
         inputType: HTMLElement,
         outputType: String,
