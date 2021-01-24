@@ -1,8 +1,10 @@
 // Auto generated file. DO NOT EDIT
 import { Query } from "../query";
 import { _PARSER } from "../symbols";
-import { RulesObject, SimpleObj } from "../types";
+import { RulesObject } from "../parser";
 import { isPlainObject, merge } from "lodash-es";
+import { SimpleObj } from "../types";
+import { Matcher } from "./types";
 
 export const functions = [
     {

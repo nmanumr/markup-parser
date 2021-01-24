@@ -1,7 +1,8 @@
-import {RulesObject, SimpleObj} from "../types";
+import {RulesObject} from "../parser";
 import {_PARSER} from "../symbols";
 import {isPlainObject, merge} from "lodash-es";
 import {Query} from "../query";
+import {SimpleObj} from "../types";
 
 function rules(nodes: Element[], rules: RulesObject) {
     let nodeData = [], nodeMergableData = [];

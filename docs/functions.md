@@ -395,7 +395,7 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 * `filter?(string)`: A string containing a selector expression to match elements against
 
 ## `rules(rules)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/misc.ts#L6)
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/misc.ts#L7)
 
 
 
@@ -412,7 +412,7 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 * `rules(RulesObject)`: 
 
 ## `tap(fn)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/misc.ts#L39)
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/misc.ts#L40)
 
 
 
@@ -429,7 +429,7 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 * `fn(Query | Function)`: 
 
 ## `trim()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L1)
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L3)
 
 
 
@@ -442,7 +442,7 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 * `string`: 
 
 ## `upperCase()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L5)
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L7)
 
 
 
@@ -455,7 +455,7 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 * `string`: 
 
 ## `lowerCase()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L9)
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L11)
 
 
 

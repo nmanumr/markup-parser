@@ -1,3 +1,5 @@
+import { Matcher } from "./types";
+
 function trim(input: string): string {
     return input.trim();
 }
@@ -9,8 +11,6 @@ function upperCase(input: string): string {
 function lowerCase(input: string): string {
     return input.toLowerCase();
 }
-
-type Matcher = { [Symbol.match](string: string): Array<string> | null; };
 
 function regex(input: string, matcher: Matcher): Array<string> | null {
     return input.match(matcher);

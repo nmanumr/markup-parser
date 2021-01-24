@@ -1,11 +1,20 @@
 import {q, Query} from "./query";
-import {merge, isEmpty, isPlainObject} from 'lodash-es'
+import {merge, isEmpty} from 'lodash-es'
 import {rename} from './utils';
-import {RulesObject, SimpleObj} from "./types";
+import {SimpleObj} from "./types";
+
+interface RuleHandlerFn {
+    (nodes: Array<Element>, parser: Parser): any;
+}
+type RuleHandler = Query | RulesObject | RuleHandlerFn;
+
+export interface RulesObject {
+    [selector: string]: RuleHandler;
+}
 
 export class Parser {
-    errors = [];
-    warnings = [];
+    private errors = [];
+    private warnings = [];
 
     registerError(error) {
         this.errors.push(error);

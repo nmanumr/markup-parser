@@ -1,6 +1,10 @@
 import {clone, isEmpty} from 'lodash-es'
-import {FnOptions} from "./types";
 import {_FUNC_DATA, _META, _PARSER, _QUERY, _ROOT_NODES} from "./symbols";
+
+interface FnOptions {
+    inputType?: any | any[],
+    outputType?: any | any[],
+}
 
 export class Query {
     constructor() {
