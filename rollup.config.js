@@ -6,8 +6,7 @@ export default [
   {
     input: 'src/main.ts',
     output: [
-      {file: 'lib/index.js', format: 'es'},
-      {file: 'lib/index-iife.js', format: 'iife', name: 'MarkupParser'},
+      {file: 'lib/index.js', format: 'es'}
     ],
     plugins: [
       nodeResolve(),
@@ -15,7 +14,9 @@ export default [
     ]
   }, {
     input: "src/main.ts",
-    output: [{ file: "lib/index.d.ts", format: "es" }],
+    output: [
+      {file: "lib/index.d.ts", format: "es"}
+    ],
     plugins: [dts()],
   }
 ];
