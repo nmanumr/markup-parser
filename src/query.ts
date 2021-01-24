@@ -15,7 +15,7 @@ export class Query {
         this[_META] = {};
 
         const data = this[_QUERY].reduce(
-            (acc, func) => func.bind(this)(acc, ...func[_FUNC_DATA].args),
+            (acc, func) => func.fn.bind(this)(acc, ...func.args),
             nodes
         );
         const meta = this[_META];
@@ -34,12 +34,9 @@ export class Query {
         }
 
         const func = function (...args) {
-            const query_func = fn;
-            query_func[_FUNC_DATA] = {name, args, ...options};
-
             const q = new Query();
             q[_QUERY] = clone(this[_QUERY]);
-            q[_QUERY].push(query_func);
+            q[_QUERY].push({fn, args, });
             return q;
         }
 
