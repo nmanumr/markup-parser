@@ -1,5 +1,5 @@
 ## `first()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L4)
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L7)
 
 Gets the first element of collection.
 
@@ -12,7 +12,7 @@ Gets the first element of collection.
 * `T | undefined`: 
 
 ## `last()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L14)
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L17)
 
 Gets the last element of collection.
 
@@ -25,7 +25,7 @@ Gets the last element of collection.
 * `T | undefined`: 
 
 ## `compact()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L27)
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L30)
 
 Creates an array with all falsey values removed.
 The values false, null, 0, "", undefined, and NaN are falsey.
@@ -39,7 +39,7 @@ The values false, null, 0, "", undefined, and NaN are falsey.
 * `undefined`: 
 
 ## `chunk(size)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L39)
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L42)
 
 Creates an array of elements split into groups the length of size.
 If array can't be split evenly, the final chunk will be the remaining elements.
@@ -57,7 +57,7 @@ If array can't be split evenly, the final chunk will be the remaining elements.
 * `size(number)`: 
 
 ## `concat(collection2)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L54)
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L57)
 
 Creates a new array concatenating array with any additional arrays and/or values.
 
@@ -74,7 +74,7 @@ Creates a new array concatenating array with any additional arrays and/or values
 * `collection2(Array | IterableIterator)`: 
 
 ## `filter(predicate)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L63)
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L66)
 
 
 
@@ -91,7 +91,7 @@ Creates a new array concatenating array with any additional arrays and/or values
 * `predicate`: 
 
 ## `length()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L72)
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L75)
 
 // @ts-ignore
 
@@ -104,24 +104,7 @@ Creates a new array concatenating array with any additional arrays and/or values
 * `number`: 
 
 ## `map(iteratee)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L83)
-
-
-
-### Input
-
-* `Array | IterableIterator`: 
-
-### Output
-
-* `undefined`: 
-
-### Parameters
-
-* `iteratee`: 
-
-## `tap(iteratee)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L90)
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L86)
 
 
 
@@ -138,7 +121,7 @@ Creates a new array concatenating array with any additional arrays and/or values
 * `iteratee`: 
 
 ## `toList()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L98)
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L96)
 
 
 
@@ -410,6 +393,40 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 ### Parameters
 
 * `filter?(string)`: A string containing a selector expression to match elements against
+
+## `rules(rules)`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/misc.ts#L6)
+
+
+
+### Input
+
+* `Array`: 
+
+### Output
+
+* `undefined`: 
+
+### Parameters
+
+* `rules(RulesObject)`: 
+
+## `tap(fn)`
+[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/misc.ts#L39)
+
+
+
+### Input
+
+* `undefined`: 
+
+### Output
+
+* `undefined`: 
+
+### Parameters
+
+* `fn(Query | Function)`: 
 
 ## `trim()`
 [Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L1)

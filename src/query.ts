@@ -1,9 +1,8 @@
-import {isEmpty, clone, merge, isPlainObject} from 'lodash-es'
-import {functions} from './functions';
-import {FnOptions, RulesObject, SimpleObj} from "./types";
+import {clone, isEmpty} from 'lodash-es'
+import {FnOptions} from "./types";
 import {_FUNC_DATA, _META, _PARSER, _QUERY, _ROOT_NODES} from "./symbols";
 
-class Query {
+export class Query {
     constructor() {
         this[_QUERY] = [];
         this[_ROOT_NODES] = null;
@@ -49,45 +48,5 @@ class Query {
         this.__proto__[name] = func;
     }
 }
-const q = new Query();
+export const q = new Query();
 
-// TODO: handle import in generator and move it to functions
-function rules(nodes: Element[], rules: RulesObject) {
-    let nodeData = [], nodeMergableData = [];
-
-    for (const node of nodes) {
-        let ruleData, ruleMeta: SimpleObj = {};
-        ruleData = this[_PARSER].parse(node, rules);
-        ruleMeta = ruleData._meta;
-
-        if (ruleMeta?.$namespaced ?? true) {
-            nodeData.push(ruleData);
-        } else {
-            nodeMergableData.push(ruleData)
-        }
-
-        delete ruleMeta?.$namespaced;
-    }
-
-    if (nodeMergableData.length > 0 && nodeMergableData.every((d) => isPlainObject(d))) {
-        nodeMergableData = merge({}, ...nodeMergableData);
-        nodeData.push(nodeMergableData);
-    } else {
-        nodeData = [...nodeData, ...nodeMergableData];
-    }
-
-    if (nodeData.length === 1) {
-        nodeData = nodeData[0];
-    } else if (nodeData.length === 0) {
-        nodeData = null;
-    }
-
-    return nodeData;
-}
-q.registerFn('rules', rules);
-
-functions.forEach((fn) => {
-    q.registerFn(fn.name, fn.fn, fn);
-})
-
-export {Query, q};

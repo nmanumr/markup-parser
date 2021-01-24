@@ -1,3 +1,6 @@
+import {Query} from "../query";
+import {_PARSER} from "../symbols";
+
 /**
  * Gets the first element of collection.
  */
@@ -83,15 +86,10 @@ function length(collection: Array<any> | IterableIterator<any> | string): number
 function* map(collection: Array<any> | IterableIterator<any>, iteratee: (e, i) => boolean) {
     let i = 0;
     for (const e of collection) {
-        yield iteratee(e, i++);
-    }
-}
-
-function* tap(collection: Array<any> | IterableIterator<any>, iteratee: (e, i) => boolean) {
-    let i = 0;
-    for (const e of collection) {
-        iteratee(e, i);
-        yield e;
+        if (iteratee instanceof Query)
+            yield iteratee.run(e, this[_PARSER])
+        else
+            yield iteratee(e, i++);
     }
 }
 

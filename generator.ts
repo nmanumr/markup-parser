@@ -61,7 +61,7 @@ function parseParam(param, tags, source) {
 }
 
 function parseFile(source, file) {
-    const functions = [];
+    const functions = [], imports = [];
 
     ts.forEachChild(source, node => {
         let name = "";
@@ -88,23 +88,26 @@ function parseFile(source, file) {
             node.getFullStart = () => node.getStart(source);
             func.node = node;
             functions.push(func);
+        } else if (node?.kind === ts.SyntaxKind.ImportDeclaration) {
+            imports.push(node);
         }
     });
 
-    return functions;
+    return [functions, imports];
 }
 
 function parseFiles(files) {
     const program = ts.createProgram(files, {});
-    const functions = [];
+    const functions = [], imports = [];
 
     for (let file of files) {
         const source = program.getSourceFile(file);
-        const fileFunctions = parseFile(source, file);
+        const [fileFunctions, fileImports] = parseFile(source, file);
         functions.push(...fileFunctions);
+        imports.push(...fileImports)
     }
 
-    return functions;
+    return [functions, imports];
 }
 
 function generateDocs(fns) {
@@ -151,7 +154,7 @@ function getTypeFactoryCode(type) {
     return ts.factory.createIdentifier(type);
 }
 
-function generateCode(fns) {
+function generateCode(fns, imports) {
     const printer = ts.createPrinter({newLine: ts.NewLineKind.LineFeed, removeComments: true});
     const outputFile = ts.createSourceFile("index.ts", "", ts.ScriptTarget.Latest, false, ts.ScriptKind.TS);
     let functionNodes = [];
@@ -163,7 +166,7 @@ function generateCode(fns) {
                 ts.factory.createStringLiteral(fn.name, true)
             )
         ];
-        if (fn.input) {
+        if (fn.input && fn.input.type) {
             syntheticObj.push(ts.factory.createPropertyAssignment(
                 'inputType',
                 getTypeFactoryCode(fn.input.type)
@@ -208,13 +211,15 @@ function generateCode(fns) {
     )
 
     const code = printer.printNode(ts.EmitHint.Unspecified, rootNode, outputFile);
+    const importsCode = [...new Set(imports.map((node) => printer.printNode(ts.EmitHint.Unspecified, node, outputFile)))]
+        .join('\n');
     fs.writeFileSync(
         './src/functions/index.ts',
-        `// Auto generated file. DO NOT EDIT\n${code}`,
+        `// Auto generated file. DO NOT EDIT\n${importsCode}\n\n${code}`,
     );
 
 }
 
-const functions = parseFiles(getFiles());
+const [functions, imports] = parseFiles(getFiles());
 generateDocs(functions);
-generateCode(functions);
+generateCode(functions, imports);

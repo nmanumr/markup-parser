@@ -53,7 +53,12 @@ export class Parser {
                 selector = (meta.$refs ?? {})[query] || '';
             }
 
-            const nodes = markup.querySelectorAll(selector);
+            let nodes;
+            if (selector === ':self') {
+                nodes = [markup]
+            } else {
+                nodes = markup.querySelectorAll(selector);
+            }
             let nodeData, nodeMeta: SimpleObj = {};
 
             if (typeof rule === 'object' && !(rule instanceof Query)) {
