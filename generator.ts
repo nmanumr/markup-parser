@@ -94,7 +94,7 @@ function parseFile(source, file) {
                     p.initializer = undefined;
                     return p;
                 }),
-                ts.factory.createLiteralTypeNode(ts.factory.createStringLiteral('QueryFunctions', true)),
+                ts.factory.createThisTypeNode(),
                 undefined
             ), dummyFile);
             declarationFunctions.push(unparsedComment + '\n' + code);

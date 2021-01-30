@@ -9,41 +9,41 @@ export declare class QueryFunctions {
 /**
  * Gets the first element of collection.
  */
-first<T>(): 'QueryFunctions';
+first<T>(): this;
 
 /**
  * Gets the last element of collection.
  */
-last<T>(): 'QueryFunctions';
+last<T>(): this;
 
 /**
  * Creates an array with all falsey values removed.
  * The values false, null, 0, "", undefined, and NaN are falsey.
  */
-compact(): 'QueryFunctions';
+compact(): this;
 
 /**
  * Creates an array of elements split into groups the length of size.
  * If array can't be split evenly, the final chunk will be the remaining elements.
  */
-chunk(size: number): 'QueryFunctions';
+chunk(size: number): this;
 
 /**
  * Creates a new array concatenating array with any additional arrays and/or values.
  */
-concat(collection2: Array<any> | IterableIterator<any>): 'QueryFunctions';
+concat(collection2: Array<any> | IterableIterator<any>): this;
 
 
-filter(predicate: (e, i) => boolean): 'QueryFunctions';
+filter(predicate: (e, i) => boolean): this;
 
 // @ts-ignore
-length(): 'QueryFunctions';
+length(): this;
 
 
-map(iteratee: (e, i) => boolean): 'QueryFunctions';
+map(iteratee: (e, i) => boolean): this;
 
 
-toList(): 'QueryFunctions';
+toList(): this;
 
 /**
  * Get the text content of input element including its descendants.
@@ -52,7 +52,7 @@ toList(): 'QueryFunctions';
  * @param collapseSpaces: should collapse spaces
  * @returns inner text of the input HTML element
  */
-text(collapseSpaces: boolean): 'QueryFunctions';
+text(collapseSpaces: boolean): this;
 
 /**
  * Get the html content of descendants of input element
@@ -60,7 +60,7 @@ text(collapseSpaces: boolean): 'QueryFunctions';
  * @param node: HTML element
  * @returns inner html of the input HTML element
  */
-html(): 'QueryFunctions';
+html(): this;
 
 /**
  * Get the html content of input element including its descendants (also includes element itself)
@@ -68,7 +68,7 @@ html(): 'QueryFunctions';
  * @param node: HTML element
  * @returns outer html of the input HTML element
  */
-fullHtml(): 'QueryFunctions';
+fullHtml(): this;
 
 /**
  * Get the value of an attribute of the input element
@@ -77,21 +77,21 @@ fullHtml(): 'QueryFunctions';
  * @param attr_name: attribute name to get value of
  * @returns attribute value
  */
-attr(attr_name: string): 'QueryFunctions';
+attr(attr_name: string): this;
 
 /**
  * Get value if input field of given element
  * @param node: HTML input element
  * @returns value of input field
  */
-value(): 'QueryFunctions';
+value(): this;
 
 /**
  * Get classes of HTML Element
  * @param node: HTML element
  * @returns Array of all applied classes
  */
-classes(): 'QueryFunctions';
+classes(): this;
 
 /**
  * Get map of all data attributes. For example:
@@ -108,17 +108,17 @@ classes(): 'QueryFunctions';
  * @param node: HTML element
  * @returns Map of all data attributes
  */
-dataset(): 'QueryFunctions';
+dataset(): this;
 
 /**
  * Get the children of the input element
  * @param node HTML element
  * @returns children of given element
  */
-children(): 'QueryFunctions';
+children(): this;
 
 // @ts-ignore
-parent(): 'QueryFunctions';
+parent(): this;
 
 /**
  * Get the ancestors of the input element up to but not including the given until selector.
@@ -128,14 +128,14 @@ parent(): 'QueryFunctions';
  * @param filter A string containing a selector expression to match elements against
  * @returns ancestors of the input element up to the given until selector or root of tree
  */
-parents(until?: string, filter?: string): 'QueryFunctions';
+parents(until?: string, filter?: string): this;
 
 /**
  * Get the siblings of the input element no includes the input element
  * @param node HTML element
  * @returns the siblings of the input element no includes the input element
  */
-siblings(): 'QueryFunctions';
+siblings(): this;
 
 /**
  * Get the first element that matches the selector by testing the element itself
@@ -143,68 +143,68 @@ siblings(): 'QueryFunctions';
  * @param node HTML element
  * @param selector A string containing a selector expression to match elements against
  */
-closest(selector: string): 'QueryFunctions';
+closest(selector: string): this;
 
 /**
  * Get the descendants of the given element matched by the given selector
  * @param node HTML element
  * @param selector A string containing a selector expression to match elements against
  */
-find(selector: string): 'QueryFunctions';
+find(selector: string): this;
 
 /**
  * Get the immediately following sibling of the input element
  * @param node HTML element
  */
-next(): 'QueryFunctions';
+next(): this;
 
 /**
  * Get the immediately preceding sibling of the input element
  * @param node HTML element
  */
-prev(): 'QueryFunctions';
+prev(): this;
 
 /**
  * Get all the following sibling of the input element. Optionally filter by given filter.
  * @param node HTML element
  * @param filter A string containing a selector expression to match elements against
  */
-nextAll(filter?: string): 'QueryFunctions';
+nextAll(filter?: string): this;
 
 /**
  * Get all the preceding sibling of the input element. Optionally filter by given filter
  * @param node HTML element
  * @param filter A string containing a selector expression to match elements against
  */
-prevAll(filter?: string): 'QueryFunctions';
+prevAll(filter?: string): this;
 
 
-rules(rules: RulesObject): 'QueryFunctions';
+rules(rules: RulesObject): this;
 
 
-tap(fn: QueryBase | Function): 'QueryFunctions';
+tap(fn: QueryBase | Function): this;
 
 
-trim(): 'QueryFunctions';
+trim(): this;
 
 
-upperCase(): 'QueryFunctions';
+upperCase(): this;
 
 
-lowerCase(): 'QueryFunctions';
+lowerCase(): this;
 
 
-regex(matcher: Matcher): 'QueryFunctions';
+regex(matcher: Matcher): this;
 
 
-repeat(n: number): 'QueryFunctions';
+repeat(n: number): this;
 
 
-replace(searchValue: string | RegExp, replacer: string | ((substring: string, ...args: any[]) => string)): 'QueryFunctions';
+replace(searchValue: string | RegExp, replacer: string | ((substring: string, ...args: any[]) => string)): this;
 
 
-split(splitter: string, limit?: number): 'QueryFunctions';
+split(splitter: string, limit?: number): this;
 
 
-startsWith(searchString: string, position?: number): 'QueryFunctions';
+startsWith(searchString: string, position?: number): this;
 }
