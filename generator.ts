@@ -82,23 +82,6 @@ function parseFile(source, file) {
             const {line} = source.getLineAndCharacterOfPosition(node.getStart(source));
             const typeParams = node.typeParameters?.map(p => p.getText(source));
 
-            const code = printer.printNode(ts.EmitHint.Unspecified, ts.factory.createMethodDeclaration(
-                undefined,
-                undefined,
-                undefined,
-                node.name,
-                undefined,
-                node.typeParameters,
-                node.parameters.slice(1).map((p) => {
-                    // @ts-ignore
-                    p.initializer = undefined;
-                    return p;
-                }),
-                ts.factory.createThisTypeNode(),
-                undefined
-            ), dummyFile);
-            declarationFunctions.push(unparsedComment + '\n' + code);
-
             const func = {
                 name,
                 ...comment,
@@ -111,6 +94,30 @@ function parseFile(source, file) {
             node.getFullStart = () => node.getStart(source);
             func.node = node;
             functions.push(func);
+
+            const code = printer.printNode(ts.EmitHint.Unspecified, ts.factory.createMethodDeclaration(
+                undefined,
+                undefined,
+                undefined,
+                node.name,
+                undefined,
+                node.typeParameters,
+                node.parameters.slice(1).map((p) => {
+                    return ts.factory.createParameterDeclaration(
+                        p.decorators,
+                        p.modifiers,
+                        p.dotDotDotToken,
+                        p.name,
+                        p.initializer || p.questionToken ? ts.factory.createToken(ts.SyntaxKind.QuestionToken): undefined,
+                        p.type,
+                        undefined
+                    );
+                }),
+                ts.factory.createThisTypeNode(),
+                undefined
+            ), dummyFile);
+            declarationFunctions.push(unparsedComment + '\n' + code);
+
         } else if (node?.kind === ts.SyntaxKind.ImportDeclaration) {
             imports.push(node);
         }

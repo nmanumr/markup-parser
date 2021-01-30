@@ -120,7 +120,7 @@ export const functions = [
         name: 'text',
         inputType: HTMLElement,
         outputType: String,
-        fn: function (node: HTMLElement, collapseSpaces: boolean): string {
+        fn: function (node: HTMLElement, collapseSpaces: boolean = true): string {
             let text = node.innerText;
             if (collapseSpaces && text) {
                 text = text.replace(/\s+/g, " ").trim();

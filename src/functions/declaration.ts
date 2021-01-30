@@ -52,7 +52,7 @@ toList(): this;
  * @param collapseSpaces: should collapse spaces
  * @returns inner text of the input HTML element
  */
-text(collapseSpaces: boolean): this;
+text(collapseSpaces?: boolean): this;
 
 /**
  * Get the html content of descendants of input element
