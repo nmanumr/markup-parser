@@ -17,10 +17,15 @@ const TYPE_MAP = {
     'T': 'T',
 };
 
+const dummyFile = ts.createSourceFile("dummy.ts", "", ts.ScriptTarget.Latest, false, ts.ScriptKind.TS);
+const declarationFunctions = [];
+const printer = ts.createPrinter({newLine: ts.NewLineKind.LineFeed, removeComments: true});
+
+
 function getFiles() {
     return fs
         .readdirSync(BASE_DIR)
-        .filter((e) => e !== 'index.ts')
+        .filter((e) => !['index.ts', 'types.ts', 'declarations.ts'].includes(e))
         .map((p) => path.join(BASE_DIR, p));
 }
 
@@ -31,7 +36,7 @@ function getLeadingComment(node, source) {
         const commentStrings = commentRanges.map(r => source.getFullText().slice(r.pos, r.end));
         comment = commentStrings[commentStrings.length - 1];
     }
-    return doctrine.parse(comment, {unwrap: true});
+    return comment;
 }
 
 function parseType(typeNode) {
@@ -67,7 +72,8 @@ function parseFile(source, file) {
         let name = "";
         if (ts.isFunctionDeclaration(node)) {
             name = node.name.text;
-            let comment = getLeadingComment(node, source);
+            const unparsedComment = getLeadingComment(node, source);
+            let comment = doctrine.parse(unparsedComment, {unwrap: true});
             comment.tags = comment.tags.map(t => ({
                 ...t,
                 description: t.description ? t.description.replace(/^\s*:\s*/, '') : t.description,
@@ -75,6 +81,23 @@ function parseFile(source, file) {
 
             const {line} = source.getLineAndCharacterOfPosition(node.getStart(source));
             const typeParams = node.typeParameters?.map(p => p.getText(source));
+
+            const code = printer.printNode(ts.EmitHint.Unspecified, ts.factory.createMethodDeclaration(
+                undefined,
+                undefined,
+                undefined,
+                node.name,
+                undefined,
+                node.typeParameters,
+                node.parameters.map((p) => {
+                    // @ts-ignore
+                    p.initializer = undefined;
+                    return p;
+                }),
+                ts.factory.createLiteralTypeNode(ts.factory.createStringLiteral('QueryFunctions', true)),
+                undefined
+            ), dummyFile);
+            declarationFunctions.push(unparsedComment + '\n' + code);
 
             const func = {
                 name,
@@ -155,8 +178,6 @@ function getTypeFactoryCode(type) {
 }
 
 function generateCode(fns, imports) {
-    const printer = ts.createPrinter({newLine: ts.NewLineKind.LineFeed, removeComments: true});
-    const outputFile = ts.createSourceFile("index.ts", "", ts.ScriptTarget.Latest, false, ts.ScriptKind.TS);
     let functionNodes = [];
 
     for (let fn of fns) {
@@ -210,14 +231,17 @@ function generateCode(fns, imports) {
         )
     )
 
-    const code = printer.printNode(ts.EmitHint.Unspecified, rootNode, outputFile);
-    const importsCode = [...new Set(imports.map((node) => printer.printNode(ts.EmitHint.Unspecified, node, outputFile)))]
+    const code = printer.printNode(ts.EmitHint.Unspecified, rootNode, dummyFile);
+    const importsCode = [...new Set(imports.map((node) => printer.printNode(ts.EmitHint.Unspecified, node, dummyFile)))]
         .join('\n');
     fs.writeFileSync(
         './src/functions/index.ts',
         `// Auto generated file. DO NOT EDIT\n${importsCode}\n\n${code}`,
     );
-
+    fs.writeFileSync(
+        './src/functions/declaration.ts',
+        `${importsCode}\n\nexport declare class QueryFunctions {\n${declarationFunctions.join('\n\n') + '\n'}}`,
+    );
 }
 
 const [functions, imports] = parseFiles(getFiles());

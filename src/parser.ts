@@ -1,12 +1,12 @@
-import {q, Query} from "./query";
-import {merge, isEmpty} from 'lodash-es'
-import {rename} from './utils';
+import {q} from "./query";
+import {QueryBase} from "./query_base";
+import {rename, isEmpty, merge} from './utils';
 import {SimpleObj} from "./types";
 
 interface RuleHandlerFn {
     (nodes: Array<Element>, parser: Parser): any;
 }
-type RuleHandler = Query | RulesObject | RuleHandlerFn;
+type RuleHandler = QueryBase | RulesObject | RuleHandlerFn;
 
 export interface RulesObject {
     [selector: string]: RuleHandler;
@@ -24,8 +24,8 @@ export class Parser {
         this.warnings.push(warning);
     }
 
-    private sortRules(rules: RulesObject | Query) {
-        if (rules instanceof Query) return [];
+    private sortRules(rules: RulesObject | QueryBase) {
+        if (rules instanceof QueryBase) return [];
 
         const firstCharScore = {'$': 0, '#': 1}
         return Object.entries(rules)
@@ -36,7 +36,7 @@ export class Parser {
             );
     }
 
-    parse(markup: string | Element, rules: RulesObject | Query) {
+    parse(markup: string | Element, rules: RulesObject | QueryBase) {
         let data: SimpleObj = {}, meta: SimpleObj = {};
 
         if (typeof markup === 'string') {
@@ -44,7 +44,7 @@ export class Parser {
             const domparser = new DOMParser();
             markup = domparser.parseFromString(markup, 'text/html').documentElement;
         }
-        if (rules instanceof Query) {
+        if (rules instanceof QueryBase) {
             const ruleData = rules.run([markup], this);
             data = ruleData[0];
             meta = ruleData[1];
@@ -70,12 +70,12 @@ export class Parser {
             }
             let nodeData, nodeMeta: SimpleObj = {};
 
-            if (typeof rule === 'object' && !(rule instanceof Query)) {
+            if (typeof rule === 'object' && !(rule instanceof QueryBase)) {
                 const mergedRules = merge({$names: meta.$names, $refs: meta.$refs}, rule);
                 rule = (q as any).rules(mergedRules);
             }
 
-            if (rule instanceof Query) {
+            if (rule instanceof QueryBase) {
                 [nodeData, nodeMeta] = rule.run(Array.from(nodes), this);
             } else if (typeof rule === 'function') {
                 nodeData = rule(Array.from(nodes), this);

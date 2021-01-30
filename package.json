@@ -21,9 +21,6 @@
     "url": "https://github.com/nmanumr/mark-parser/issues"
   },
   "homepage": "https://github.com/nmanumr/mark-parser#readme",
-  "dependencies": {
-    "lodash-es": "^4.17.20"
-  },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/plugin-transform-runtime": "^7.12.10",

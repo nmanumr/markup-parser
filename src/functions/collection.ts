@@ -1,4 +1,4 @@
-import {Query} from "../query";
+import {QueryBase} from "../query_base";
 import {_PARSER} from "../symbols";
 
 /**
@@ -86,7 +86,7 @@ function length(collection: Array<any> | IterableIterator<any> | string): number
 function* map(collection: Array<any> | IterableIterator<any>, iteratee: (e, i) => boolean) {
     let i = 0;
     for (const e of collection) {
-        if (iteratee instanceof Query)
+        if (iteratee instanceof QueryBase)
             yield iteratee.run(e, this[_PARSER])
         else
             yield iteratee(e, i++);

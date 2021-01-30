@@ -1,9 +1,9 @@
 // Auto generated file. DO NOT EDIT
-import { Query } from "../query";
+import { QueryBase } from "../query_base";
 import { _PARSER } from "../symbols";
-import { RulesObject } from "../parser";
-import { isPlainObject, merge } from "lodash-es";
 import { SimpleObj } from "../types";
+import { RulesObject } from "../parser";
+import { isPlainObject, merge } from "../utils";
 import { Matcher } from "./types";
 
 export const functions = [
@@ -102,7 +102,7 @@ export const functions = [
         fn: function* (collection: Array<any> | IterableIterator<any>, iteratee: (e, i) => boolean) {
             let i = 0;
             for (const e of collection) {
-                if (iteratee instanceof Query)
+                if (iteratee instanceof QueryBase)
                     yield iteratee.run(e, this[_PARSER]);
                 else
                     yield iteratee(e, i++);
@@ -120,7 +120,7 @@ export const functions = [
         name: 'text',
         inputType: HTMLElement,
         outputType: String,
-        fn: function (node: HTMLElement, collapseSpaces: boolean = true): string {
+        fn: function (node: HTMLElement, collapseSpaces: boolean): string {
             let text = node.innerText;
             if (collapseSpaces && text) {
                 text = text.replace(/\s+/g, " ").trim();
@@ -305,7 +305,7 @@ export const functions = [
                 delete ruleMeta?.$namespaced;
             }
             if (nodeMergableData.length > 0 && nodeMergableData.every((d) => isPlainObject(d))) {
-                nodeMergableData = merge({}, ...nodeMergableData);
+                nodeMergableData = nodeMergableData.reduce((acc, obj) => merge(acc, obj), {});
                 nodeData.push(nodeMergableData);
             }
             else {
@@ -322,8 +322,8 @@ export const functions = [
     },
     {
         name: 'tap',
-        fn: function (data, fn: Query | Function) {
-            if (fn instanceof Query) {
+        fn: function (data, fn: QueryBase | Function) {
+            if (fn instanceof QueryBase) {
                 return fn.run(data, this[_PARSER]);
             }
             else if (typeof fn === "function") {

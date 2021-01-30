@@ -1,8 +1,8 @@
-import {RulesObject} from "../parser";
 import {_PARSER} from "../symbols";
-import {isPlainObject, merge} from "lodash-es";
-import {Query} from "../query";
+import {QueryBase} from "../query_base";
 import {SimpleObj} from "../types";
+import {RulesObject} from "../parser";
+import {isPlainObject, merge} from '../utils';
 
 function rules(nodes: Element[], rules: RulesObject) {
     let nodeData = [], nodeMergableData = [];
@@ -22,7 +22,7 @@ function rules(nodes: Element[], rules: RulesObject) {
     }
 
     if (nodeMergableData.length > 0 && nodeMergableData.every((d) => isPlainObject(d))) {
-        nodeMergableData = merge({}, ...nodeMergableData);
+        nodeMergableData = nodeMergableData.reduce((acc, obj) => merge(acc, obj), {});
         nodeData.push(nodeMergableData);
     } else {
         nodeData = [...nodeData, ...nodeMergableData];
@@ -37,8 +37,8 @@ function rules(nodes: Element[], rules: RulesObject) {
     return nodeData;
 }
 
-function tap(data, fn: Query | Function) {
-    if (fn instanceof Query) {
+function tap(data, fn: QueryBase | Function) {
+    if (fn instanceof QueryBase) {
         return fn.run(data, this[_PARSER]);
     } else if (typeof fn === 'function') {
         return fn(data, this[_PARSER]);

@@ -133,7 +133,7 @@ Creates a new array concatenating array with any additional arrays and/or values
 
 * `undefined`: 
 
-## `text([collapseSpaces])`
+## `text(collapseSpaces)`
 [Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L8)
 
 Get the text content of input element including its descendants.
@@ -148,7 +148,7 @@ Get the text content of input element including its descendants.
 
 ### Parameters
 
-* `collapseSpaces?`: should collapse spaces(default true)
+* `collapseSpaces`: should collapse spaces
 
 ## `html()`
 [Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L22)
@@ -426,7 +426,7 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 
 ### Parameters
 
-* `fn(Query | Function)`: 
+* `fn(QueryBase | Function)`: 
 
 ## `trim()`
 [Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L3)
