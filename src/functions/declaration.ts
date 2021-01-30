@@ -9,41 +9,41 @@ export declare class QueryFunctions {
 /**
  * Gets the first element of collection.
  */
-first<T>(collection: string | Array<any> | IterableIterator<any>): 'QueryFunctions';
+first<T>(): 'QueryFunctions';
 
 /**
  * Gets the last element of collection.
  */
-last<T>(collection: string | Array<any> | IterableIterator<any>): 'QueryFunctions';
+last<T>(): 'QueryFunctions';
 
 /**
  * Creates an array with all falsey values removed.
  * The values false, null, 0, "", undefined, and NaN are falsey.
  */
-compact(collection: string | Array<any> | IterableIterator<any>): 'QueryFunctions';
+compact(): 'QueryFunctions';
 
 /**
  * Creates an array of elements split into groups the length of size.
  * If array can't be split evenly, the final chunk will be the remaining elements.
  */
-chunk(collection: string | Array<any> | IterableIterator<any>, size: number): 'QueryFunctions';
+chunk(size: number): 'QueryFunctions';
 
 /**
  * Creates a new array concatenating array with any additional arrays and/or values.
  */
-concat(collection1: Array<any> | IterableIterator<any>, collection2: Array<any> | IterableIterator<any>): 'QueryFunctions';
+concat(collection2: Array<any> | IterableIterator<any>): 'QueryFunctions';
 
 
-filter(collection: Array<any> | IterableIterator<any>, predicate: (e, i) => boolean): 'QueryFunctions';
+filter(predicate: (e, i) => boolean): 'QueryFunctions';
 
 // @ts-ignore
-length(collection: Array<any> | IterableIterator<any> | string): 'QueryFunctions';
+length(): 'QueryFunctions';
 
 
-map(collection: Array<any> | IterableIterator<any>, iteratee: (e, i) => boolean): 'QueryFunctions';
+map(iteratee: (e, i) => boolean): 'QueryFunctions';
 
 
-toList(collection: Array<any> | IterableIterator<any>): 'QueryFunctions';
+toList(): 'QueryFunctions';
 
 /**
  * Get the text content of input element including its descendants.
@@ -52,7 +52,7 @@ toList(collection: Array<any> | IterableIterator<any>): 'QueryFunctions';
  * @param collapseSpaces: should collapse spaces
  * @returns inner text of the input HTML element
  */
-text(node: HTMLElement, collapseSpaces: boolean): 'QueryFunctions';
+text(collapseSpaces: boolean): 'QueryFunctions';
 
 /**
  * Get the html content of descendants of input element
@@ -60,7 +60,7 @@ text(node: HTMLElement, collapseSpaces: boolean): 'QueryFunctions';
  * @param node: HTML element
  * @returns inner html of the input HTML element
  */
-html(node: HTMLElement): 'QueryFunctions';
+html(): 'QueryFunctions';
 
 /**
  * Get the html content of input element including its descendants (also includes element itself)
@@ -68,7 +68,7 @@ html(node: HTMLElement): 'QueryFunctions';
  * @param node: HTML element
  * @returns outer html of the input HTML element
  */
-fullHtml(node: HTMLElement): 'QueryFunctions';
+fullHtml(): 'QueryFunctions';
 
 /**
  * Get the value of an attribute of the input element
@@ -77,21 +77,21 @@ fullHtml(node: HTMLElement): 'QueryFunctions';
  * @param attr_name: attribute name to get value of
  * @returns attribute value
  */
-attr(node: HTMLElement, attr_name: string): 'QueryFunctions';
+attr(attr_name: string): 'QueryFunctions';
 
 /**
  * Get value if input field of given element
  * @param node: HTML input element
  * @returns value of input field
  */
-value(node: HTMLInputElement): 'QueryFunctions';
+value(): 'QueryFunctions';
 
 /**
  * Get classes of HTML Element
  * @param node: HTML element
  * @returns Array of all applied classes
  */
-classes(node: HTMLElement): 'QueryFunctions';
+classes(): 'QueryFunctions';
 
 /**
  * Get map of all data attributes. For example:
@@ -108,17 +108,17 @@ classes(node: HTMLElement): 'QueryFunctions';
  * @param node: HTML element
  * @returns Map of all data attributes
  */
-dataset(node: HTMLElement): 'QueryFunctions';
+dataset(): 'QueryFunctions';
 
 /**
  * Get the children of the input element
  * @param node HTML element
  * @returns children of given element
  */
-children(node: HTMLElement): 'QueryFunctions';
+children(): 'QueryFunctions';
 
 // @ts-ignore
-parent(node: HTMLElement): 'QueryFunctions';
+parent(): 'QueryFunctions';
 
 /**
  * Get the ancestors of the input element up to but not including the given until selector.
@@ -128,14 +128,14 @@ parent(node: HTMLElement): 'QueryFunctions';
  * @param filter A string containing a selector expression to match elements against
  * @returns ancestors of the input element up to the given until selector or root of tree
  */
-parents(node: HTMLElement, until?: string, filter?: string): 'QueryFunctions';
+parents(until?: string, filter?: string): 'QueryFunctions';
 
 /**
  * Get the siblings of the input element no includes the input element
  * @param node HTML element
  * @returns the siblings of the input element no includes the input element
  */
-siblings(node: HTMLElement): 'QueryFunctions';
+siblings(): 'QueryFunctions';
 
 /**
  * Get the first element that matches the selector by testing the element itself
@@ -143,68 +143,68 @@ siblings(node: HTMLElement): 'QueryFunctions';
  * @param node HTML element
  * @param selector A string containing a selector expression to match elements against
  */
-closest(node: HTMLElement, selector: string): 'QueryFunctions';
+closest(selector: string): 'QueryFunctions';
 
 /**
  * Get the descendants of the given element matched by the given selector
  * @param node HTML element
  * @param selector A string containing a selector expression to match elements against
  */
-find(node: HTMLElement, selector: string): 'QueryFunctions';
+find(selector: string): 'QueryFunctions';
 
 /**
  * Get the immediately following sibling of the input element
  * @param node HTML element
  */
-next(node: HTMLElement): 'QueryFunctions';
+next(): 'QueryFunctions';
 
 /**
  * Get the immediately preceding sibling of the input element
  * @param node HTML element
  */
-prev(node: HTMLElement): 'QueryFunctions';
+prev(): 'QueryFunctions';
 
 /**
  * Get all the following sibling of the input element. Optionally filter by given filter.
  * @param node HTML element
  * @param filter A string containing a selector expression to match elements against
  */
-nextAll(node: HTMLElement, filter?: string): 'QueryFunctions';
+nextAll(filter?: string): 'QueryFunctions';
 
 /**
  * Get all the preceding sibling of the input element. Optionally filter by given filter
  * @param node HTML element
  * @param filter A string containing a selector expression to match elements against
  */
-prevAll(node: HTMLElement, filter?: string): 'QueryFunctions';
+prevAll(filter?: string): 'QueryFunctions';
 
 
-rules(nodes: Element[], rules: RulesObject): 'QueryFunctions';
+rules(rules: RulesObject): 'QueryFunctions';
 
 
-tap(data, fn: QueryBase | Function): 'QueryFunctions';
+tap(fn: QueryBase | Function): 'QueryFunctions';
 
 
-trim(input: string): 'QueryFunctions';
+trim(): 'QueryFunctions';
 
 
-upperCase(input: string): 'QueryFunctions';
+upperCase(): 'QueryFunctions';
 
 
-lowerCase(input: string): 'QueryFunctions';
+lowerCase(): 'QueryFunctions';
 
 
-regex(input: string, matcher: Matcher): 'QueryFunctions';
+regex(matcher: Matcher): 'QueryFunctions';
 
 
-repeat(input: string, n: number): 'QueryFunctions';
+repeat(n: number): 'QueryFunctions';
 
 
-replace(input: string, searchValue: string | RegExp, replacer: string | ((substring: string, ...args: any[]) => string)): 'QueryFunctions';
+replace(searchValue: string | RegExp, replacer: string | ((substring: string, ...args: any[]) => string)): 'QueryFunctions';
 
 
-split(input: string, splitter: string, limit?: number): 'QueryFunctions';
+split(splitter: string, limit?: number): 'QueryFunctions';
 
 
-startsWith(input: string, searchString: string, position?: number): 'QueryFunctions';
+startsWith(searchString: string, position?: number): 'QueryFunctions';
 }

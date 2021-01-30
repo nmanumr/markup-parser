@@ -89,7 +89,7 @@ function parseFile(source, file) {
                 node.name,
                 undefined,
                 node.typeParameters,
-                node.parameters.map((p) => {
+                node.parameters.slice(1).map((p) => {
                     // @ts-ignore
                     p.initializer = undefined;
                     return p;
