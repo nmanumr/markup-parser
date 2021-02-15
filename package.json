@@ -13,14 +13,14 @@
   "keywords": [],
   "author": "nmanumr",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nmanumr/markup-parser.git"
+  "repository": "git://github.com/nmanumr/markup-parser.git",
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
   },
   "bugs": {
-    "url": "https://github.com/nmanumr/mark-parser/issues"
+    "url": "https://github.com/nmanumr/markup-parser/issues"
   },
-  "homepage": "https://github.com/nmanumr/mark-parser#readme",
+  "homepage": "https://github.com/nmanumr/markup-parser#readme",
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/plugin-transform-runtime": "^7.12.10",

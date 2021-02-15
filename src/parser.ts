@@ -40,9 +40,14 @@ export class Parser {
         let data: SimpleObj = {}, meta: SimpleObj = {};
 
         if (typeof markup === 'string') {
-            // TODO: handle nodejs env
+            if (!window || !window.DOMParser) {
+                throw new Error(`Unparsed markup is not supported for NodeJs environment. Try parsing it with JsDOM first.`);
+            }
             const domparser = new DOMParser();
             markup = domparser.parseFromString(markup, 'text/html').documentElement;
+        }
+        if (typeof markup !== 'object') {
+            throw new Error(`Invalid markup. Expected 'string' or 'HTMLElement' got '${typeof markup}'`);
         }
         if (rules instanceof QueryBase) {
             const ruleData = rules.run([markup], this);
