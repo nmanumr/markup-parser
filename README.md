@@ -31,7 +31,7 @@ const { Parser, q } = require('@nmanumr/markup-parser');
 const rules = {
   'p': q.first().text(),
 };
-const dom = new JSDOM('<!DOCTYPE html><p>Hello world</p>');
+const dom = new JSDOM('<html><p>Hello world</p>');
 const data = new Parser()
     .parse(dom.window.document.documentElement, rules);
 
@@ -41,7 +41,7 @@ console.log(data);
 
 ### For browsers
 ```js
-const { Parser, q } = require('@nmanumr/markup-parser');
+import { Parser, q } from '@nmanumr/markup-parser');
 
 const rules = {
   'p': q.first().text(),
@@ -50,7 +50,7 @@ const rules = {
 // or alternatively you can also pass a query selected element
 // like this: 
 // const ma
-const markup = '<!DOCTYPE html><p>Hello world</p>';
+const markup = '<html><p>Hello world</p>';
 const data = new Parser()
     .parse(markup, rules);
 console.log(data);
