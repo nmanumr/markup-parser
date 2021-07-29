@@ -1,5 +1,5 @@
 ## `first()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L7)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L7)
 
 Gets the first element of collection.
 
@@ -12,7 +12,7 @@ Gets the first element of collection.
 * `T | undefined`: 
 
 ## `last()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L17)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L17)
 
 Gets the last element of collection.
 
@@ -25,7 +25,7 @@ Gets the last element of collection.
 * `T | undefined`: 
 
 ## `compact()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L30)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L30)
 
 Creates an array with all falsey values removed.
 The values false, null, 0, "", undefined, and NaN are falsey.
@@ -39,7 +39,7 @@ The values false, null, 0, "", undefined, and NaN are falsey.
 * `undefined`: 
 
 ## `chunk(size)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L42)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L42)
 
 Creates an array of elements split into groups the length of size.
 If array can't be split evenly, the final chunk will be the remaining elements.
@@ -57,7 +57,7 @@ If array can't be split evenly, the final chunk will be the remaining elements.
 * `size(number)`: 
 
 ## `concat(collection2)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L57)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L57)
 
 Creates a new array concatenating array with any additional arrays and/or values.
 
@@ -74,7 +74,7 @@ Creates a new array concatenating array with any additional arrays and/or values
 * `collection2(Array | IterableIterator)`: 
 
 ## `filter(predicate)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L66)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L66)
 
 
 
@@ -91,7 +91,7 @@ Creates a new array concatenating array with any additional arrays and/or values
 * `predicate`: 
 
 ## `length()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L75)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L75)
 
 // @ts-ignore
 
@@ -104,7 +104,7 @@ Creates a new array concatenating array with any additional arrays and/or values
 * `number`: 
 
 ## `map(iteratee)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L86)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L86)
 
 
 
@@ -121,7 +121,7 @@ Creates a new array concatenating array with any additional arrays and/or values
 * `iteratee`: 
 
 ## `toList()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L96)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/collection.ts#L96)
 
 
 
@@ -134,7 +134,7 @@ Creates a new array concatenating array with any additional arrays and/or values
 * `undefined`: 
 
 ## `text([collapseSpaces])`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L8)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L8)
 
 Get the text content of input element including its descendants.
 
@@ -151,7 +151,7 @@ Get the text content of input element including its descendants.
 * `collapseSpaces?`: should collapse spaces(default true)
 
 ## `html()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L22)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L22)
 
 Get the html content of descendants of input element
 
@@ -164,7 +164,7 @@ Get the html content of descendants of input element
 * `string`: inner html of the input HTML element
 
 ## `fullHtml()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L32)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L32)
 
 Get the html content of input element including its descendants (also includes element itself)
 
@@ -177,7 +177,7 @@ Get the html content of input element including its descendants (also includes e
 * `string`: outer html of the input HTML element
 
 ## `attr(attr_name)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L43)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L43)
 
 Get the value of an attribute of the input element
 
@@ -194,7 +194,7 @@ Get the value of an attribute of the input element
 * `attr_name(string)`: attribute name to get value of
 
 ## `value()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L52)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L52)
 
 Get value if input field of given element
 
@@ -207,7 +207,7 @@ Get value if input field of given element
 * `string`: value of input field
 
 ## `classes()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L61)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L61)
 
 Get classes of HTML Element
 
@@ -220,7 +220,7 @@ Get classes of HTML Element
 * `Array`: Array of all applied classes
 
 ## `dataset()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L80)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L80)
 
 Get map of all data attributes. For example:
 
@@ -242,7 +242,7 @@ will return
 * `Object`: Map of all data attributes
 
 ## `children()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L89)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L89)
 
 Get the children of the input element
 
@@ -255,7 +255,7 @@ Get the children of the input element
 * `Array`: children of given element
 
 ## `parent()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L99)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L99)
 
 // @ts-ignore
 
@@ -268,7 +268,7 @@ Get the children of the input element
 * `HTMLElement`: 
 
 ## `parents([until], [filter])`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L111)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L111)
 
 Get the ancestors of the input element up to but not including the given until selector.
 if no util selector provided will return all the ancestors
@@ -287,7 +287,7 @@ if no util selector provided will return all the ancestors
 * `filter?(string)`: A string containing a selector expression to match elements against
 
 ## `siblings()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L134)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L134)
 
 Get the siblings of the input element no includes the input element
 
@@ -300,7 +300,7 @@ Get the siblings of the input element no includes the input element
 * `Array`: the siblings of the input element no includes the input element
 
 ## `closest(selector)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L144)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L144)
 
 Get the first element that matches the selector by testing the element itself
 and traversing up through its ancestors in the DOM tree.
@@ -318,7 +318,7 @@ and traversing up through its ancestors in the DOM tree.
 * `selector(string)`: A string containing a selector expression to match elements against
 
 ## `find(selector)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L153)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L153)
 
 Get the descendants of the given element matched by the given selector
 
@@ -335,7 +335,7 @@ Get the descendants of the given element matched by the given selector
 * `selector(string)`: A string containing a selector expression to match elements against
 
 ## `next()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L161)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L161)
 
 Get the immediately following sibling of the input element
 
@@ -348,7 +348,7 @@ Get the immediately following sibling of the input element
 * `Element`: 
 
 ## `prev()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L169)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L169)
 
 Get the immediately preceding sibling of the input element
 
@@ -361,7 +361,7 @@ Get the immediately preceding sibling of the input element
 * `Element`: 
 
 ## `nextAll([filter])`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L178)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L178)
 
 Get all the following sibling of the input element. Optionally filter by given filter.
 
@@ -378,7 +378,7 @@ Get all the following sibling of the input element. Optionally filter by given f
 * `filter?(string)`: A string containing a selector expression to match elements against
 
 ## `prevAll([filter])`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L194)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/dom.ts#L194)
 
 Get all the preceding sibling of the input element. Optionally filter by given filter
 
@@ -395,7 +395,7 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 * `filter?(string)`: A string containing a selector expression to match elements against
 
 ## `rules(rules)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/misc.ts#L7)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/misc.ts#L7)
 
 
 
@@ -412,7 +412,7 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 * `rules(RulesObject)`: 
 
 ## `tap(fn)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/misc.ts#L40)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/misc.ts#L40)
 
 
 
@@ -429,7 +429,7 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 * `fn(QueryBase | Function)`: 
 
 ## `trim()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L3)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L3)
 
 
 
@@ -442,7 +442,7 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 * `string`: 
 
 ## `upperCase()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L7)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L7)
 
 
 
@@ -455,7 +455,7 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 * `string`: 
 
 ## `lowerCase()`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L11)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L11)
 
 
 
@@ -468,7 +468,7 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 * `string`: 
 
 ## `regex(matcher)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L15)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L15)
 
 
 
@@ -485,7 +485,7 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 * `matcher(Matcher)`: 
 
 ## `repeat(n)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L19)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L19)
 
 
 
@@ -502,7 +502,7 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 * `n(number)`: 
 
 ## `replace(searchValue, replacer)`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L23)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L23)
 
 
 
@@ -520,7 +520,7 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 * `replacer(string | )`: 
 
 ## `split(splitter, [limit])`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L27)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L27)
 
 
 
@@ -538,7 +538,7 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 * `limit?(number)`: 
 
 ## `startsWith(searchString, [position])`
-[Source](https:/github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L31)
+[Source](https://github.com/nmanumr/mark-parser/tree/master/src/functions/string.ts#L31)
 
 
 
@@ -554,4 +554,3 @@ Get all the preceding sibling of the input element. Optionally filter by given f
 
 * `searchString(string)`: 
 * `position?(number)`: 
-
