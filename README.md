@@ -64,8 +64,6 @@ const data = new Parser()
     .parse(element, rules);
 ```
 
-## Basic Concepts
+## Supported Functions
 
-### Query
-Query is a 
-
+Read more about supported functiosn here: [Supported Function](https://github.com/nmanumr/markup-parser/blob/master/docs/functions.md)
